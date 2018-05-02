@@ -11,11 +11,23 @@
   <div class="container pos-vertical-center">
     <div class="row">
       <div class="col-md-7 col-lg-5">
-        <div class="boxed boxed--lg bg--dark boxed--border boxed-form">
+        <div class="boxed boxed--lg bg--white boxed--border boxed-form">
           <h2>Login !</h2>
           <p class="lead"> Welcome back, sign in with your existing account credentials </p>
-          <form method="post" action="">
-            {% csrf_token %} {{ form.as_p }}
+          <form method="post" action="">{% csrf_token %}
+            <div class="form-group">
+              <label class="required" for="id_username">Username:</label>
+              <div class="input-icon">
+                 <i class="material-icons">person</i>
+                 {{form.username}}
+              </div>
+
+              <label class="required" for="id_password1">Password:</label>
+              <div class="input-icon input-icon--right">
+                <i class="material-icons">visibility</i>
+                  {{form.password}}
+              </div>
+            </div>
              <div class="col-md-12">
                 <button class="btn btn--primary type--uppercase" type="submit" value="{% trans 'Log in' %}">Login</button>
             </div>

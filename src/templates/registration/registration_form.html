@@ -16,22 +16,31 @@
         <h2>Create an account</h2>
         <p class="lead">Get started , No credit card required &mdash; cancel at any time.</p>
         <hr class="short">
-        <form role="form" method='post' action="">
-          {% csrf_token %}
-
+        <form method="post" action=""> {% csrf_token %}
           <div class="form-group">
-            <p class="required"><label class="required" for="id_username">Username:</label>
+            <label class="required" for="id_username">Username:</label>
+            <div class="input-icon">
+	             <i class="material-icons">person</i>
                {{form.username}}
-            </p>
-            <p class="required"><label class="required" for="id_email">Email:</label>
-              {{form.email}}
-            </p>
-            <p class="required"><label class="required" for="id_password1">Password:</label>
-              {{form.password1}}
-            </p>
-            <p class="required"><label class="required" for="id_password2">Password Confirmation:</label>
-              {{form.password2}}
-            </p>
+            </div>
+
+            <label class="required" for="id_email">Email:</label>
+            <div class="input-icon">
+	             <i class="material-icons">mail</i>
+               {{form.email}}
+            </div>
+
+            <label class="required" for="id_password1">Password:</label>
+            <div class="input-icon input-icon--right">
+              <i class="material-icons">visibility</i>
+                {{form.password1}}
+            </div>
+
+            <label class="required" for="id_password2">Password Confirmation:</label>
+            <div class="input-icon input-icon--right">
+              <i class="material-icons">visibility</i>
+                {{form.password2}}
+            </div>
           </div>
           <div class="col-md-12">
              <button class="btn btn--primary type--uppercase" type="submit" value="{% trans 'Submit' %}">submit</button>
