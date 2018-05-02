@@ -1,0 +1,80 @@
+{% extends "registration/base2.html" %} {% load staticfiles %} {% load i18n %} {% block head_title %}Account activated ! | {% endblock %} {% block content %}
+<section class="cover height-100 imagebg text-center slider slider--ken-burns" data-arrows="true" data-paging="true">
+      <div class="background-image-holder background--top">
+        <img alt="background" src="{% static 'img/dark_background.jpg' %}" />
+      </div>
+      <nav id="menu2" class="bar bar-2 hidden-xs bar--transparent bar--absolute" data-scroll-class='90vh:pos-fixed'>
+        <div class="container">
+          </br>
+          </br>
+          </br>
+          </br>
+          </br>
+          </br>
+          </br>
+          </br>
+          </br>
+          </br>
+          </br>
+          </br>
+          </br>
+          <div class="row">
+            <div class="col-lg-2 text-center text-left-sm hidden-xs order-lg-2">
+              <div class="bar__module">
+                <a href="{% url 'home' %}">
+                        <img class="logo logo-dark" alt="logo" src="{% static 'img/logo-dark.png' %}" />
+                        <img class="logo logo-light" alt="logo" src="{% static 'img/logo-light.png' %}" />
+                    </a>
+              </div>
+              <!--end module-->
+            </div>
+            <div class="col-lg-5 order-lg-1">
+              <div class="bar__module">
+                <ul class="menu-horizontal text-left">
+                  <li>
+                    <a href=""></a>
+                  </li>
+                  <li>
+                    <a href=""></a>
+                  </li>
+                  <li>
+                    <a href=""></a>
+                  </li>
+                  <li>
+                    <a href=""> </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-5 text-right text-left-xs text-left-sm order-lg-3">
+              <div class="bar__module">
+                <a class="" href=""></a>
+                <a class="" href=""></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class="main-container">
+        <section class="height-100 bg--dark text-center">
+          <div class="container pos-vertical-center">
+            <div class="row">
+              <div class="col-md-12">
+                <h2>
+                      {% trans "Your account is now activated." %}
+                      {% if not user.is_authenticated %}
+                      {% trans "You can log in." %}
+                      {% endif %}
+                  </h2>
+              </div>
+            </div>
+            <!--end of row-->
+          </div>
+          <!--end of container-->
+
+        </section>
+      </div>
+      <!--<div class="loader"></div>-->
+      <a class="back-to-top inner-link" href="#start" data-scroll-class="100vh:active">
+    <i class="stack-interface stack-up-open-big"></i>
+</a> {% endblock %}

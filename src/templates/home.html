@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block head_title %}Welcome | {% endblock %}
+{% block background%}
+<!-- <section class="cover height-100 imagebg text-center" data-overlay="2" id="home">
+  <div class="background-image-holder"> -->
+    <section class="cover height-100 imagebg text-center slider slider--ken-burns" data-arrows="true" data-paging="true">
+        <ul class="slides">
+    <li class="imagebg" data-overlay="4">
+        <div class="background-image-holder background--top">
+            <img alt="background" src="{% static 'img/dark_background.jpg' %}" />
+        </div>
+        <div class="container pos-vertical-center">
+            <div class="row">
+                <div class="col-md-12">
+                  <div class="typed-headline">
+                      <span class="h1 inline-block"> ProjectX ! Move </span>
+                      <span class="h1 inline-block typed-text typed-text--cursor color--primary" data-typed-strings="fast,quick,rapid "></span>
+
+                  <p class="lead">
+                      Build fast, powerful cloud based infrastructures with an easy
+                      <br class="hidden-xs hidden-sm" /> way to suit a range of purposes.
+                  </p>
+                  </div>
+                    <a class="btn btn--primary type--uppercase" href="#">
+                        <span class="btn__text">
+                            View The Demos
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+     </li>
+</ul>
+</section>
+<section class="text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" "bg--dark">
+                <ul class="list-inline list-inline--images">
+                    <li>
+                        <img alt="Image" src="{% static 'img/partner-1.png' %}" />
+                    </li>
+                    <li>
+                        <img alt="Image" src="{% static 'img/partner-2.png' %}" />
+                    </li>
+                    <li>
+                        <img alt="Image" src="{% static 'img/partner-3.png' %}" />
+                    </li>
+                    <li>
+                        <img alt="Image" src="{% static 'img/partner-4.png' %}" />
+                    </li>
+                    </ul>
+                  </br>
+                    <ul class="list-inline list-inline--images">
+                    <li>
+                        <img alt="Image" src="{% static 'img/partner-5.png' %}" />
+                    </li>
+                    <li>
+                        <img alt="Image" src="{% static 'img/partner-7.png' %}" />
+                    </li>
+                    <li>
+                        <img alt="Image" src="{% static 'img/partner-6.png' %}" />
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--end of row-->
+    </div>
+    <!--end of container-->
+</section>
+{% endblock %}
+{% block Signup %}
+<!-- call from views.py -->
+<section class="text-center" id="about">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-4 col-md-4">
+        <h1>{{home_title}}</h1>
+        <form method="POST" action=""> {% csrf_token %}
+          <!-- form call from views.py   -->
+          {{ home_SignUpForm.as_p }}
+          <input type="submit" value="Sign Up" />
+        </form>
+        <form method="POST" action="{% url 'defaultInfra' %}"> {% csrf_token %}
+          <input type="submit" value="launch" />
+        </form>
+      </div>
+    </div>
+    <!--end of row-->
+  </div>
+  <!--end of container-->
+</section>
+{% endblock %}

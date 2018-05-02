@@ -1,0 +1,54 @@
+{% extends "registration/base2.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% block head_title %}Registration | {% endblock %}
+{% block content %}
+<section class="imageblock switchable feature-large height-100">
+  <div class="imageblock__content col-lg-6 col-md-4 pos-right">
+    <div class="background-image-holder">
+      <img alt="image" src="{% static 'img/inner-6.jpg' %}" />
+    </div>
+  </div>
+  <div class="container pos-vertical-center">
+    <div class="row">
+      <div class="col-lg-5 col-md-7">
+        <div class="boxed boxed--lg bg--light boxed--border boxed-form">
+        <h2>Create an account</h2>
+        <p class="lead">Get started , No credit card required &mdash; cancel at any time.</p>
+        <hr class="short">
+        <form role="form" method='post' action="">
+          {% csrf_token %}
+
+          <div class="form-group">
+            <p class="required"><label class="required" for="id_username">Username:</label>
+               {{form.username}}
+            </p>
+            <p class="required"><label class="required" for="id_email">Email:</label>
+              {{form.email}}
+            </p>
+            <p class="required"><label class="required" for="id_password1">Password:</label>
+              {{form.password1}}
+            </p>
+            <p class="required"><label class="required" for="id_password2">Password Confirmation:</label>
+              {{form.password2}}
+            </p>
+          </div>
+          <div class="col-md-12">
+             <button class="btn btn--primary type--uppercase" type="submit" value="{% trans 'Submit' %}">submit</button>
+         </div>
+        </form>
+        <br>
+        <div class="col-md-12">
+          <p>Already a member ?<a href="{% url 'auth_login' %}"> Login Here!</a></p>
+       </div>
+       <div class="col-md-12">
+         <p>Back to <a href="{% url 'home' %}">home</a></p>
+      </div>
+</div>
+      </div>
+    </div>
+    <!--end of row-->
+  </div>
+  <!--end of container-->
+</section>
+{% endblock %}

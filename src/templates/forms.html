@@ -1,0 +1,72 @@
+{% extends "base.html" %} {% load staticfiles %} {% block head_title %}Contact | {% endblock %} {% block Contact %}
+<!-- <section class="cover height-100 imagebg text-center slider slider--ken-burns" data-arrows="true" data-paging="true">
+  <div class="background-image-holder background--top">
+    <img alt="background" src="{% static 'img/dark_background.jpg' %}" />
+  </div> -->
+
+<section class="cover height-100 imagebg text-center slider slider--ken-burns" data-arrows="true" data-paging="true">
+  <ul class="slides">
+    <li class="imagebg" data-overlay="4">
+      <div class="background-image-holder background--top">
+        <img alt="background" src="{% static 'img/dark_background.jpg' %}" />
+      </div>
+      <section class="switchable">
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col-md-5">
+              </br>
+              <img alt="Image" class="border--round box-shadow-wide" src="{% static 'img/inner-2.jpg' %}">
+            </div>
+            <div class="col-md-6">
+              <div class="row switchable__text">
+                <div class="boxed boxed--lg bg--dark boxed--border boxed-form">
+                  <h2 style="text-center">Contact us</h2>
+                  <p class="lead">Give us a call or drop by anytime, we endeavour to answer all enquiries within 24 hours on business days.</p>
+                  <form method="POST" action="" class="row"> {% csrf_token %}
+                    <div class="col-md-6">
+                      <label>Your Name:</label> {{ contact_form.full_name }}
+                    </div>
+                    <div class="col-md-6">
+                      <label>Email Address:</label> {{ contact_form.email }}
+                    </div>
+                    <div class="col-md-12">
+                      <label>Message:</label> {{ contact_form.message }}
+                    </div>
+                    <div class="col-md-12">
+                      <button type="submit" class="btn btn--primary type--uppercase">Send</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </li>
+  </ul>
+  </section>
+</section>
+
+
+
+
+
+
+
+
+
+<!-- call from views.py -->
+<!-- <section class="text-center" id="about">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-4 col-md-4">
+        <h2>Contact Us</h2>
+        <form method="POST" action=""> {% csrf_token %} -->
+<!-- form call from views.py   -->
+<!-- {{ contact_form }}
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+    </div>
+  </div>
+</section> -->
+{% endblock %}
