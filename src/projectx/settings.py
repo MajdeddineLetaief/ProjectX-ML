@@ -142,4 +142,4 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_in_env", "media_roo
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
 SITE_ID = 1
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/user'

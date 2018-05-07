@@ -3450,8 +3450,8 @@ section.text-right > .container:last-child > .row:only-child > div[class*='col-'
 /**! 37. Spacing **/
 section,
 footer {
-  padding-top: 7.42857143em;
-  padding-bottom: 7.42857143em;
+  padding-top: 0.42857143em;
+  padding-bottom: 0.42857143em;
 }
 section.space--xxs,
 footer.space--xxs {
@@ -9267,7 +9267,7 @@ footer.footer-6.bg--primary .footer__lower {
   background: #3483de;
 }
 footer.footer-7 {
-  padding: 1.85714286em 0;
+  padding: 1em ;
 }
 @media all and (min-width: 768px) {
   footer .list-inline + .btn {

@@ -72,6 +72,23 @@ def contact(request):
      }
      return render(request, "forms.html", context)
 
+def user(request):
+    title = 'Welcome'
+    if request.user.is_authenticated():
+        title = 'Hello %s' %(request.user)
+        context = {
+            "home_title" : title,
+        }
+
+
+    # client = boto3.client('cloudformation')
+    # with open('newsletter/cloudformationtest.json', 'r') as f:
+    # 	response = client.create_stack(
+    # 		StackName='stacktest',
+    #     	TemplateBody=f.read()
+    # 		)
+
+    return render(request, "user.html", context)
 
 def defaultInfra(request):
     client = boto3.client('cloudformation')

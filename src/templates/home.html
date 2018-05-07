@@ -1,6 +1,4 @@
 {% extends "base.html" %} {% load staticfiles %} {% block head_title %}Welcome | {% endblock %} {% block background%}
-<!-- <section class="cover height-100 imagebg text-center" data-overlay="2" id="home">
-  <div class="background-image-holder"> -->
 <section class="cover height-100 imagebg text-center slider slider--ken-burns" data-arrows="true" data-paging="true">
   <ul class="slides">
     <li class="imagebg" data-overlay="4">
@@ -13,59 +11,53 @@
             <div class="typed-headline">
               <span class="h1 inline-block"> ProjectX ! Move </span>
               <span class="h1 inline-block typed-text typed-text--cursor color--primary" data-typed-strings="fast,quick,rapid "></span>
-
               <p class="lead">
                 Build fast, powerful cloud based infrastructures with an easy
                 <br class="hidden-xs hidden-sm" /> way to suit a range of purposes.
               </p>
             </div>
             <a class="btn btn--primary type--uppercase" href="#">
-                        <span class="btn__text">
-                            View The Demos
-                        </span>
-                    </a>
+              <span class="btn__text">View The Demos</span>
+            </a>
           </div>
         </div>
       </div>
     </li>
   </ul>
 </section>
-<section class="text-center">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12" "bg--dark">
-        <ul class="list-inline list-inline--images">
-          <li>
-            <img alt="Image" src="{% static 'img/partner-1.png' %}" />
-          </li>
-          <li>
-            <img alt="Image" src="{% static 'img/partner-2.png' %}" />
-          </li>
-          <li>
-            <img alt="Image" src="{% static 'img/partner-3.png' %}" />
-          </li>
-          <li>
-            <img alt="Image" src="{% static 'img/partner-4.png' %}" />
-          </li>
-        </ul>
-        </br>
-        <ul class="list-inline list-inline--images">
-          <li>
-            <img alt="Image" src="{% static 'img/partner-5.png' %}" />
-          </li>
-          <li>
-            <img alt="Image" src="{% static 'img/partner-7.png' %}" />
-          </li>
-          <li>
-            <img alt="Image" src="{% static 'img/partner-6.png' %}" />
-          </li>
-        </ul>
+  <div class="tab__content">
+    <section class="testimonials-1 space--xs bg--secondary">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <p class="lead">
+              Trusted by over 20,000 customers
+              <br class="hidden-xs hidden-sm" /> in over 140 countries
+            </p>
+          </div>
+          <div class="col-md-8">
+            <ul class="list-inline social-list">
+              <li class="list-inline-item">
+                <img alt="Image" class="image--xxs" src="{% static 'img/partner-3.png' %}" />
+              </li>
+              <li class="list-inline-item">
+                <img alt="Image" class="image--xxs" src="{% static 'img/partner-2.png' %}" />
+              </li>
+              <li class="list-inline-item">
+                <img alt="Image" class="image--xxs" src="{% static 'img/partner-4.png' %}" />
+              </li>
+              <li class="list-inline-item">
+                <img alt="Image" class="image--xxs" src="{% static 'img/partner-5.png' %}" />
+              </li>
+              <li class="list-inline-item">
+                <img alt="Image" class="image--xxs" src="{% static 'img/partner-6.png' %}" />
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
-    <!--end of row-->
+    </section>
   </div>
-  <!--end of container-->
-</section>
 {% endblock %} {% block Signup %}
 <!-- call from views.py -->
 <section class="text-center" id="about">
@@ -78,11 +70,10 @@
           {{ home_SignUpForm.as_p }}
           <input type="submit" value="Sign Up" />
         </form>
-          <br class="hidden-xs hidden-sm" />
-          <a class="btn btn--sm type--uppercase" href="{% url 'defaultInfra' %}">
+        <br class="hidden-xs hidden-sm" />
+        <a class="btn btn--sm type--uppercase" href="{% url 'defaultInfra' %}">
             <span class="btn__text">Launch</span>
         </a>
-
       </div>
     </div>
     <!--end of row-->

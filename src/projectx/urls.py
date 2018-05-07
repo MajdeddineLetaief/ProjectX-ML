@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^defaultInfra/', newsletter_views.defaultInfra, name='defaultInfra'),
+    url(r'^user/', newsletter_views.user, name='user'),
 ]
 
 if settings.DEBUG:
