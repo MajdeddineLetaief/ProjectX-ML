@@ -11,8 +11,11 @@ urlpatterns = [
     url(r'^about/$', projectx_views.about, name='about'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.default.urls')),
-    url(r'^defaultInfra/', newsletter_views.defaultInfra, name='defaultInfra'),
+    url(r'^createInfra/', newsletter_views.createInfra, name='createInfra'),
+    url(r'^deleteInfra/', newsletter_views.deleteInfra, name='deleteInfra'),
     url(r'^user/', newsletter_views.user, name='user'),
+    url(r'^defInf/', newsletter_views.defInf, name='defInf'),
+
 ]
 
 if settings.DEBUG:

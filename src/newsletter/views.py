@@ -10,6 +10,7 @@ import json
 
 
 def home(request):
+    client = boto3.client('cloudformation')
     title = 'Welcome'
     form = SignUpForm(request.POST or None)
     if request.user.is_authenticated():
@@ -23,31 +24,8 @@ def home(request):
     context = {
         "home_title" : "Thank you !"
     }
-
-    # client = boto3.client('cloudformation')
-    # with open('newsletter/cloudformationtest.json', 'r') as f:
-    # 	response = client.create_stack(
-    # 		StackName='stacktest',
-    #     	TemplateBody=f.read()
-    # 		)
-
     return render(request, "home.html", context)
 
-    ##################################################
-    # if not request.user.is_authenticated():
-    #     form = SignUpForm()
-    #     title = 'Welcome'
-    #     context = {
-    #         "template_title" : title,
-    #         "template_SignUpForm" : form
-    #     }
-    #     return render(request, "home.html", context)
-    # else:
-    #     title = 'Hello %s' %(request.user)
-    # context = {
-    #     "template_title" : title
-    # }
-    # return render(request, "home.html", context)
 def contact(request):
      form = ContactForm(request.POST or None)
      if form.is_valid():
@@ -80,22 +58,40 @@ def user(request):
             "home_title" : title,
         }
 
-
-    # client = boto3.client('cloudformation')
-    # with open('newsletter/cloudformationtest.json', 'r') as f:
-    # 	response = client.create_stack(
-    # 		StackName='stacktest',
-    #     	TemplateBody=f.read()
-    # 		)
-
     return render(request, "user.html", context)
 
-def defaultInfra(request):
+
+#####################
+def defInf(request):
+    client = boto3.client('cloudformation')
+    title = 'Default Infrastructure'
+    response = client.describe_stacks(
+
+    )
+    for each in response['Stacks']:
+        value = each['StackStatus']
+        value1 = each['StackName']
+        if value1 == 'stacktest':
+            context = {
+                "response" : value
+            }
+            return render(request, "defInf.html", context)
+        else :
+            return render(request, "defInf.html", {})
+
+###################
+def createInfra(request):
     client = boto3.client('cloudformation')
     with open('newsletter/cloudformationtest.json', 'r') as f:
     	response = client.create_stack(
     		StackName='stacktest',
         	TemplateBody=f.read()
     		)
+    return render(request, "user.html", {})
 
-    return render(request, "home.html", {})
+def deleteInfra(request):
+    client = boto3.client('cloudformation')
+    response = client.delete_stack(
+        StackName='stacktest',
+    )
+    return render(request, "user.html", {})
