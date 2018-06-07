@@ -32,9 +32,8 @@
           <div class="bar__module">
             <ul>
               <li>
-                <a style= "margin-right:3%; color:black ;" href="{% url 'user' %}"><b>Hi {{ user.username }}</b></a>
-                <a  class="btn btn--sm btn btn-dark type--uppercase" href="{% url 'auth_logout' %}" role="button">
-                  <span class="btn__text" style="color:white">Log out</span>
+                <a  class="btn btn--sm" href="{% url 'auth_logout' %}" role="button">
+                  <span class="btn__text" style="color:black">Log out</span>
                 </a>
               </li>
             </ul>

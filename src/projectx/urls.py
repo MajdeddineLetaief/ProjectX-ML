@@ -11,10 +11,22 @@ urlpatterns = [
     url(r'^about/$', projectx_views.about, name='about'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.default.urls')),
-    url(r'^createInfra/', newsletter_views.createInfra, name='createInfra'),
-    url(r'^deleteInfra/', newsletter_views.deleteInfra, name='deleteInfra'),
+    url(r'^createDefInfra1/', newsletter_views.createDefInfra1, name='createDefInfra1'),
+    url(r'^createDefInfra2/', newsletter_views.createDefInfra2, name='createDefInfra2'),
+    url(r'^createDefInfra3/', newsletter_views.createDefInfra3, name='createDefInfra3'),
+    url(r'^createDefInfra4/', newsletter_views.createDefInfra4, name='createDefInfra4'),
+    url(r'^deleteInfra1/', newsletter_views.deleteInfra1, name='deleteInfra1'),
+    url(r'^deleteInfra2/', newsletter_views.deleteInfra2, name='deleteInfra2'),
+    url(r'^deleteInfra3/', newsletter_views.deleteInfra3, name='deleteInfra3'),
+    url(r'^deleteInfra4/', newsletter_views.deleteInfra4, name='deleteInfra4'),
     url(r'^user/', newsletter_views.user, name='user'),
     url(r'^defInf/', newsletter_views.defInf, name='defInf'),
+    url(r'^cusInf_Basic/', newsletter_views.cusInf_Basic, name='cusInf_Basic'),
+    url(r'^cusInf_NACL/', newsletter_views.cusInf_NACL, name='cusInf_NACL'),
+    url(r'^cusInf_SG/', newsletter_views.cusInf_SG, name='cusInf_SG'),
+    url(r'^cusInf_Instance/', newsletter_views.cusInf_Instance, name='cusInf_Instance'),
+
+
 
 ]
 

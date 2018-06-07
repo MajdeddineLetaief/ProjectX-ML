@@ -1,0 +1,104 @@
+{% extends "baseuser.html" %} {% load staticfiles %} {% block head_title %}Default Infrastructure | {% endblock %} {% block content %}
+<div class="container" style="min-height:865px;">
+  <hr>
+  <ol class="breadcrumbs" style="margin-bottom:0em;">
+    <li><a href="{% url 'user' %}">Main menu</a></li>
+    <li>Custom infrastructure</li>
+  </ol>
+  <div class="col-md-12">
+    <div class="row justify-content-center">
+      <h2>Compose your <b>own</b> infrastructure !</h2>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-8">
+        <div class="row justify-content-center">
+          <h3>NACLs configuration</h5>
+        </div>
+        <div class="boxed boxed--border">
+          <form class="text-left form-email row" data-success="Thanks for your enquiry, we'll be in touch shortly." data-error="Please fill in all fields correctly.">
+            <div class="col-md-12 text-center boxed" style="margin-bottom:-4%; margin-top:-4%;">
+              <h5>NACL1</h5>
+            </div>
+            <div class="col-md-12">
+              <span><b>Source IP:</b></span>
+              <input type="text" name="name" placeholder="10.0.0.0/24 for example" class="validate-required" />
+            </div>
+            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
+              <span><b>Allowed inbound protocols:</b></span>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">SSH</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="design" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">HTTPS</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="dev" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ICMP</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="brand" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ALL</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="marketing" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
+              <span><b>Allowed outbound protocols:</b></span>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">SSH</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="design" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">HTTPS</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="dev" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ICMP</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="brand" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ALL</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="marketing" />
+                <label></label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="row justify-content-center">
+          <a class="btn btn--primary type--uppercase" style="margin-top:2%;" href="{% url 'cusInf_Basic' %}">
+            <span class="btn__text">previous</span>
+          </a>
+          <a class="btn btn--primary type--uppercase" style="margin-top:2%;" href="{% url 'cusInf_SG' %}">
+            <span class="btn__text">next</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

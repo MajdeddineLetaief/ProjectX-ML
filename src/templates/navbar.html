@@ -35,13 +35,6 @@
                 <a href="{% url 'home' %}">Home</a>
               </li>
               <li>
-                {% if user.is_authenticated %}
-                  <a href="{% url 'user' %}">{{ user.username }}</span>
-                {% else %}
-                  <a href="">Pages</span>
-                {% endif %}
-              </li>
-              <li>
                 <a href="{% url 'about' %}">About</span>
               </li>
               <li>
@@ -55,18 +48,22 @@
             <ul>
               <li>
                 {% if user.is_authenticated %}
+                <ul class="menu-horizontal text-left">
+                  <li>
+                    <a  href="{% url 'user' %}"><b>{{ user.username }}</b>'s account</span>
+                  </li>
                 {% else %}
-                  <a class="btn btn--sm type--uppercase" href="{% url 'registration_register' %}">
-                    <span class="btn__text">Sign In</span>
+                  <a class="btn btn--sm" href="{% url 'registration_register' %}">
+                    <span class="btn__text">Sign up</span>
                   </a>
                 {% endif %}
                 {% if user.is_authenticated %}
-                  <a class="btn btn--sm btn btn-light type--uppercase" href="{% url 'auth_logout' %}" />
-                    <span class="btn__text" style="color:black">Log out</span>
+                  <a class="btn btn--sm" href="{% url 'auth_logout' %}" />
+                    <span class="btn__text" style="color:white">Log out</span>
                   </a>
                 {% else %}
-                  <a class="btn btn--sm btn--primary type--uppercase" href="{% url 'auth_login' %}">
-                    <span class="btn__text">Login</span>
+                  <a class="btn btn--sm btn--primary" href="{% url 'auth_login' %}">
+                    <span class="btn__text">Log in</span>
                   </a>
                 {% endif %}
               </li>

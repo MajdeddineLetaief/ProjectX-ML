@@ -1,7 +1,12 @@
 {% extends "baseuser.html" %} {% load staticfiles %} {% block head_title %}Default Infrastructure | {% endblock %} {% block content %}
-<div class="container" style="min-height:830px;">
+<div class="container" style="min-height:865px;">
   <hr>
-  </br>
+  <ol class="breadcrumbs" style="margin-bottom:0em;">
+                                <li>
+                                    <a href="{% url 'user' %}">Main menu</a>
+                                </li>
+                                <li>Default infrastructure</li>
+                            </ol>
   {% if response == 'CREATE_COMPLETE' %}
   <div class="col-md-12">
     <div class="row justify-content-center">
@@ -9,7 +14,7 @@
     </div>
   </div>
   <div class="col-md-12">
-    <div class="boxed bg--secondary boxed--lg boxed--border">
+    <div class="boxed bg--secondary boxed--lg boxed--border" style="background:white;">
       <div class="tabs-container text-center" data-content-align="left">
         <ul class="tabs">
           <li class="active">
@@ -17,7 +22,7 @@
               <span class="h5">Tiny</span>
             </div>
             <div class="tab__content">
-              <section class="switchable bg--secondary">
+              <section class="switchable bg--secondary" style="background:white;">
                 <div class="container">
                   <div class="row justify-content-between">
                     <div class="col-md-7 switchable__text">
@@ -61,49 +66,30 @@
                           </div>
                         </li>
                       </ul>
-                      {% if response == 'CREATE_COMPLETE' %}
+                      {% if response == 'CREATE_COMPLETE' and response1 == 'tinyModel' %}
+                      <div class="row justify-content-center">
+                        <div class="alert bg--primary">
+                          <div class="alert__body">
+                            <span>Your infrastructure is available now ! </span>
+                          </div>
+                        </div>
+                      </div>
                       </br>
                       <div class="tabs-container text-center" data-content-align="left">
                         <ul class="tabs">
                           <li>
                             <div class="tab__title">
-                              <a class="h5" style="color:black; text-decoration:none;" href="https://s3.eu-central-1.amazonaws.com/privatekeys-ml16/francfortpk.pem" >Download private key</a>
+                              <a class="h5" style="color:black; text-decoration:none;" href="https://s3.eu-central-1.amazonaws.com/privatekeys-ml16/francfortpk.pem">Download private key</a>
                             </div>
                           </li>
 
                           <li>
                             <div class="tab__title">
-                              <a class="h5" style="color:black; text-decoration:none;" href="{% url 'deleteInfra' %}" >Delete Stack</a>
+                              <a class="h5" style="color:black; text-decoration:none;" href="{% url 'deleteInfra1' %}">Delete Stack</a>
                             </div>
                           </li>
                         </ul>
                       </div>
-                      <!-- <div class="row justify-content-center">
-                        <p class="lead">
-                          Your servers are now available <a href="https://eu-central-1.console.aws.amazon.com/ec2/v2/home?region=eu-central-1#Instances:sort=instanceId" style="text-decoration:none; color:black;"><b>here</b></a>
-                        </p>
-                      </div>
-                      <div class="row justify-content-center">
-                        <p class="lead">
-                          Download the private key to access to your servers <a href="https://s3.eu-central-1.amazonaws.com/privatekeys-ml16/francfortpk.pem" style="text-decoration:none; color:black;"><b>here</b></a>
-                        </p>
-                      </div>
-                    </br>
-                      <div class="col-md-4">
-                        <a class="btn btn--sm btn-danger type--uppercase" href="{% url 'deleteInfra' %}">
-                          <span class="btn__text" style="color:white;">Download private key</span>
-                        </a>
-                      </div>
-                      <div class="col-md-10">
-                        <a class="btn btn--sm btn-danger type--uppercase" href="{% url 'deleteInfra' %}">
-                          <span class="btn__text" style="color:white;">Connect your instances</span>
-                        </a>
-                      </div>
-                      <div class="col-md-10">
-                        <a class="btn btn--sm btn-danger type--uppercase" href="{% url 'deleteInfra' %}">
-                          <span class="btn__text" style="color:white;">Delete the build</span>
-                        </a>
-                      </div>-->
                       {% elif response == 'CREATE_IN_PROGRESS' %}
                       </br>
                       <div class="row justify-content-center">
@@ -125,7 +111,7 @@
                       {% else %}
                       </br>
                       <div class="col-md-9">
-                        <a class="btn btn--primary type--uppercase" href="{% url 'createInfra' %}">
+                        <a class="btn btn--primary type--uppercase" href="{% url 'createDefInfra1' %}">
                           <span class="btn__text">Launch the build</span>
                         </a>
                       </div>
@@ -135,9 +121,42 @@
                       <img alt="Image" class="border--round box-shadow-wide" src="{% static 'img/inner-4.jpg' %}" />
                     </div>
                   </div>
-                  <!--end of row-->
+                  {% if response == 'CREATE_COMPLETE' and response1 == 'tinyModel' %}
+                  </br>
+                  <div class="boxed bg--secondary boxed--md boxed--border" style="background:white;">
+                    <div class="row justify-content-center">
+                      <div class="col-md-12 col-lg-8">
+                        <div class="wizard">
+                          <h5>Private key</h5>
+                          <section class="text-center">
+                            <div class="pos-vertical-center">
+                              <h4>Download the private key !</h4>
+                            </div>
+                          </section>
+                          <h5>Permission</h5>
+                          <section class="text-center">
+                            <div class="pos-vertical-center">
+                              <h4>Change key permissions via the command:</h4>
+                              <h4><b>chmod 400 francfortpk.pem</b></h4>
+                            </div>
+                          </section>
+                          <h5>Connect</h5>
+                          <section class="text-center">
+                            <div class="pos-vertical-center">
+                              <h4>Connect to your instances via this ssh command:</h4>
+                              </hr>
+                              <h4 style="color:#4d92df;"><b>Instance 1:</b> </h4>
+                              <h4>ssh -i "francfortpk.pem" ec2-user@<b>{{ip1}}</b><h4>
+                              <h4 style="color:#4d92df;"><b>Instance 2:</b> </h4>
+                              <h4>ssh -i "francfortpk.pem" ec2-user@<b>{{ip2}}</b><h4>
+                              </div>
+                            </section>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                  {% endif %}
                 </div>
-                <!--end of container-->
               </section>
             </div>
           </li>
@@ -146,10 +165,10 @@
               <span class="h5">Micro</span>
             </div>
             <div class="tab__content">
-              <section class="switchable bg--secondary">
+              <section class="switchable bg--secondary" style="background:white;">
                 <div class="container">
                   <div class="row justify-content-between">
-                    <div class="col-md-6 switchable__text">
+                    <div class="col-md-7 switchable__text">
                       <ul class="accordion accordion-1">
                         <li>
                           <div class="accordion__title">
@@ -190,15 +209,97 @@
                           </div>
                         </li>
                       </ul>
-                      <!--end accordion-->
+                      {% if response == 'CREATE_COMPLETE' and response1 == 'microModel' %}
+                      <div class="row justify-content-center">
+                        <div class="alert bg--primary">
+                          <div class="alert__body">
+                            <span>Your infrastructure is available now ! </span>
+                          </div>
+                        </div>
+                      </div>
+                      </br>
+                      <div class="tabs-container text-center" data-content-align="left">
+                        <ul class="tabs">
+                          <li>
+                            <div class="tab__title">
+                              <a class="h5" style="color:black; text-decoration:none;" href="https://s3.eu-central-1.amazonaws.com/privatekeys-ml16/francfortpk.pem">Download private key</a>
+                            </div>
+                          </li>
+
+                          <li>
+                            <div class="tab__title">
+                              <a class="h5" style="color:black; text-decoration:none;" href="{% url 'deleteInfra1' %}">Delete Stack</a>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                      {% elif response == 'CREATE_IN_PROGRESS' %}
+                      </br>
+                      <div class="row justify-content-center">
+                        <div class="alert bg--success">
+                          <div class="alert__body">
+                            <span>Your infrastructure will be available in few minutes ! </span>
+                          </div>
+                        </div>
+                      </div>
+                      {% elif response == 'DELETE_IN_PROGRESS' %}
+                      </br>
+                      <div class="row justify-content-center">
+                        <div class="alert bg--error">
+                          <div class="alert__body">
+                            <span>Your infrastructure will be removed in few minutes !</span>
+                          </div>
+                        </div>
+                      </div>
+                      {% else %}
+                      </br>
+                      <div class="col-md-9">
+                        <a class="btn btn--primary type--uppercase" href="{% url 'createDefInfra2' %}">
+                          <span class="btn__text">Launch the build</span>
+                        </a>
+                      </div>
+                      {% endif %}
                     </div>
                     <div class="col-lg-5 col-md-6">
-                      <img alt="Image" class="border--round box-shadow-wide" src="{% static 'img/inner-3.jpg' %}" />
+                      <img alt="Image" class="border--round box-shadow-wide" src="{% static 'img/inner-4.jpg' %}" />
                     </div>
                   </div>
-                  <!--end of row-->
+                  {% if response == 'CREATE_COMPLETE' and response1 == 'microModel' %}
+                  </br>
+                  <div class="boxed bg--secondary boxed--md boxed--border" >
+                    <div class="row justify-content-center">
+                      <div class="col-md-12 col-lg-8">
+                        <div class="wizard">
+                          <h5>Private key</h5>
+                          <section class="text-center">
+                            <div class="pos-vertical-center">
+                              <h4>Download the private key !</h4>
+                            </div>
+                          </section>
+                          <h5>Permission</h5>
+                          <section class="text-center">
+                            <div class="pos-vertical-center">
+                              <h4>Change key permissions via the command:</h4>
+                              <h4><b>chmod 400 francfortpk.pem</b></h4>
+                            </div>
+                          </section>
+                          <h5>Connect</h5>
+                          <section class="text-center">
+                            <div class="pos-vertical-center">
+                              <h4>Connect to your instances via this ssh command:</h4>
+                              </hr>
+                              <h4 style="color:#4d92df;"><b>Instance 1:</b> </h4>
+                              <h4>ssh -i "francfortpk.pem" ec2-user@<b>{{ip1}}</b><h4>
+                              <h4 style="color:#4d92df;"><b>Instance 2:</b> </h4>
+                              <h4>ssh -i "francfortpk.pem" ec2-user@<b>{{ip2}}</b><h4>
+                              </div>
+                            </section>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                  {% endif %}
                 </div>
-                <!--end of container-->
               </section>
             </div>
           </li>
@@ -207,10 +308,10 @@
               <span class="h5">Medium</span>
             </div>
             <div class="tab__content">
-              <section class="switchable">
+              <section class="switchable bg--secondary" style="background:white;">
                 <div class="container">
                   <div class="row justify-content-between">
-                    <div class="col-md-6 switchable__text">
+                    <div class="col-md-7 switchable__text">
                       <ul class="accordion accordion-1">
                         <li>
                           <div class="accordion__title">
@@ -251,15 +352,17 @@
                           </div>
                         </li>
                       </ul>
-                      <!--end accordion-->
+                      <div class="col-md-9">
+                        <a class="btn btn--primary type--uppercase" href="{% url 'createDefInfra3' %}">
+                          <span class="btn__text">Launch the build</span>
+                        </a>
+                      </div>
                     </div>
                     <div class="col-lg-5 col-md-6">
-                      <img alt="Image" class="border--round box-shadow-wide" src="{% static 'img/inner-2.jpg' %}" />
+                      <img alt="Image" class="border--round box-shadow-wide" src="{% static 'img/inner-4.jpg' %}" />
                     </div>
                   </div>
-                  <!--end of row-->
                 </div>
-                <!--end of container-->
               </section>
             </div>
           </li>
@@ -268,10 +371,10 @@
               <span class="h5">Large</span>
             </div>
             <div class="tab__content">
-              <section class="switchable ">
+              <section class="switchable bg--secondary" style="background:white;">
                 <div class="container">
                   <div class="row justify-content-between">
-                    <div class="col-md-6 switchable__text">
+                    <div class="col-md-7 switchable__text">
                       <ul class="accordion accordion-1">
                         <li>
                           <div class="accordion__title">
@@ -312,9 +415,14 @@
                           </div>
                         </li>
                       </ul>
+                      <div class="col-md-9">
+                        <a class="btn btn--primary type--uppercase" href="{% url 'createDefInfra4' %}">
+                          <span class="btn__text">Launch the build</span>
+                        </a>
+                      </div>
                     </div>
-                    <div class="col-lg-5 col-md-5">
-                      <img alt="Image" class="border--round box-shadow-wide" src="{% static 'img/inner-2.jpg' %}" />
+                    <div class="col-lg-5 col-md-6">
+                      <img alt="Image" class="border--round box-shadow-wide" src="{% static 'img/inner-4.jpg' %}" />
                     </div>
                   </div>
                 </div>
@@ -322,33 +430,6 @@
             </div>
           </li>
         </ul>
-      </div>
-    </div>
-    </br>
-    <div class="boxed bg--secondary boxed--md boxed--border">
-      <div class="row justify-content-center">
-        <div class="col-md-12 col-lg-8">
-            <div class="wizard">
-              <h5>Intro</h5>
-              <section class="text-center">
-                <div class="pos-vertical-center">
-                  <h4>Welcome to the Wizard, using jQuery Steps</h4>
-                </div>
-              </section>
-              <h5>Navigation</h5>
-              <section class="text-center">
-                <div class="pos-vertical-center">
-                  <h4>Navigate the steps using your keyboard arrows</h4>
-                </div>
-              </section>
-              <h5>Finish</h5>
-              <section class="text-center">
-                <div class="pos-vertical-center">
-                  <h4>Use Wizards for onboarding, form data collection and more</h4>
-                </div>
-              </section>
-            </div>
-          </div>
       </div>
     </div>
   </div>
@@ -359,7 +440,7 @@
     </div>
   </div>
   <div class="col-md-12">
-    <div class="boxed bg--secondary boxed--lg boxed--border">
+    <div class="boxed bg--secondary boxed--lg boxed--border" style="background:white;">
       <div class="tabs-container text-center" data-content-align="left">
         <ul class="tabs">
           <li class="active">
@@ -367,7 +448,7 @@
               <span class="h5">Tiny</span>
             </div>
             <div class="tab__content">
-              <section class="switchable bg--secondary">
+              <section class="switchable bg--secondary" style="background:white;">
                 <div class="container">
                   <div class="row justify-content-between">
                     <div class="col-md-7 switchable__text">
@@ -411,8 +492,7 @@
                           </div>
                         </li>
                       </ul>
-                      {% if response == 'CREATE_COMPLETE' %}
-                      </br>
+                      {% if response == 'CREATE_COMPLETE' and response1 == 'tinyModel'%}
                       <div class="tabs-container text-center" data-content-align="left">
                         <ul class="tabs">
                           <li>
@@ -423,37 +503,11 @@
 
                           <li>
                             <div class="tab__title">
-                              <a class="h5" style="color:black; text-decoration:none;" href="{% url 'deleteInfra' %}" >Delete Stack</a>
+                              <a class="h5" style="color:black; text-decoration:none;" href="{% url 'deleteInfra1' %}" >Delete Stack</a>
                             </div>
                           </li>
                         </ul>
                       </div>
-                      <!-- <div class="row justify-content-center">
-                        <p class="lead">
-                          Your servers are now available <a href="https://eu-central-1.console.aws.amazon.com/ec2/v2/home?region=eu-central-1#Instances:sort=instanceId" style="text-decoration:none; color:black;"><b>here</b></a>
-                        </p>
-                      </div>
-                      <div class="row justify-content-center">
-                        <p class="lead">
-                          Download the private key to access to your servers <a href="https://s3.eu-central-1.amazonaws.com/privatekeys-ml16/francfortpk.pem" style="text-decoration:none; color:black;"><b>here</b></a>
-                        </p>
-                      </div>
-                    </br>
-                      <div class="col-md-4">
-                        <a class="btn btn--sm btn-danger type--uppercase" href="{% url 'deleteInfra' %}">
-                          <span class="btn__text" style="color:white;">Download private key</span>
-                        </a>
-                      </div>
-                      <div class="col-md-10">
-                        <a class="btn btn--sm btn-danger type--uppercase" href="{% url 'deleteInfra' %}">
-                          <span class="btn__text" style="color:white;">Connect your instances</span>
-                        </a>
-                      </div>
-                      <div class="col-md-10">
-                        <a class="btn btn--sm btn-danger type--uppercase" href="{% url 'deleteInfra' %}">
-                          <span class="btn__text" style="color:white;">Delete the build</span>
-                        </a>
-                      </div>-->
                       {% elif response == 'CREATE_IN_PROGRESS' %}
                       </br>
                       <div class="row justify-content-center">
@@ -475,7 +529,7 @@
                       {% else %}
                       </br>
                       <div class="col-md-9">
-                        <a class="btn btn--primary type--uppercase" href="{% url 'createInfra' %}">
+                        <a class="btn btn--primary type--uppercase" href="{% url 'createDefInfra1' %}">
                           <span class="btn__text">Launch the build</span>
                         </a>
                       </div>
@@ -485,9 +539,7 @@
                       <img alt="Image" class="border--round box-shadow-wide" src="{% static 'img/inner-4.jpg' %}" />
                     </div>
                   </div>
-                  <!--end of row-->
                 </div>
-                <!--end of container-->
               </section>
             </div>
           </li>
@@ -496,10 +548,10 @@
               <span class="h5">Micro</span>
             </div>
             <div class="tab__content">
-              <section class="switchable bg--secondary">
+              <section class="switchable bg--secondary" style="background:white;">
                 <div class="container">
                   <div class="row justify-content-between">
-                    <div class="col-md-6 switchable__text">
+                    <div class="col-md-7 switchable__text">
                       <ul class="accordion accordion-1">
                         <li>
                           <div class="accordion__title">
@@ -540,15 +592,54 @@
                           </div>
                         </li>
                       </ul>
-                      <!--end accordion-->
+                      {% if response == 'CREATE_COMPLETE' and response1 == 'microModel' %}
+                      <div class="tabs-container text-center" data-content-align="left">
+                        <ul class="tabs">
+                          <li>
+                            <div class="tab__title">
+                              <a class="h5" style="color:black; text-decoration:none;" href="https://s3.eu-central-1.amazonaws.com/privatekeys-ml16/francfortpk.pem" >Download private key</a>
+                            </div>
+                          </li>
+
+                          <li>
+                            <div class="tab__title">
+                              <a class="h5" style="color:black; text-decoration:none;" href="{% url 'deleteInfra2' %}" >Delete Stack</a>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                      {% elif response == 'CREATE_IN_PROGRESS' and response1 == 'microModel' %}
+                      </br>
+                      <div class="row justify-content-center">
+                        <div class="alert bg--success">
+                          <div class="alert__body">
+                            <span>Your infrastructure will be available in few minutes ! </span>
+                          </div>
+                        </div>
+                      </div>
+                      {% elif response == 'DELETE_IN_PROGRESS' and response1 == 'microModel' %}
+                      </br>
+                      <div class="row justify-content-center">
+                        <div class="alert bg--error">
+                          <div class="alert__body">
+                            <span>Your infrastructure will be removed in few minutes !</span>
+                          </div>
+                        </div>
+                      </div>
+                      {% else %}
+                      </br>
+                      <div class="col-md-9">
+                        <a class="btn btn--primary type--uppercase" href="{% url 'createDefInfra2' %}">
+                          <span class="btn__text">Launch the build</span>
+                        </a>
+                      </div>
+                      {% endif %}
                     </div>
                     <div class="col-lg-5 col-md-6">
-                      <img alt="Image" class="border--round box-shadow-wide" src="{% static 'img/inner-3.jpg' %}" />
+                      <img alt="Image" class="border--round box-shadow-wide" src="{% static 'img/inner-4.jpg' %}" />
                     </div>
                   </div>
-                  <!--end of row-->
                 </div>
-                <!--end of container-->
               </section>
             </div>
           </li>
@@ -557,10 +648,10 @@
               <span class="h5">Medium</span>
             </div>
             <div class="tab__content">
-              <section class="switchable">
+              <section class="switchable bg--secondary" style="background:white;">
                 <div class="container">
                   <div class="row justify-content-between">
-                    <div class="col-md-6 switchable__text">
+                    <div class="col-md-7 switchable__text">
                       <ul class="accordion accordion-1">
                         <li>
                           <div class="accordion__title">
@@ -601,15 +692,54 @@
                           </div>
                         </li>
                       </ul>
-                      <!--end accordion-->
+                      {% if response == 'CREATE_COMPLETE' and response1 == 'mediumModel' %}
+                      <div class="tabs-container text-center" data-content-align="left">
+                        <ul class="tabs">
+                          <li>
+                            <div class="tab__title">
+                              <a class="h5" style="color:black; text-decoration:none;" href="https://s3.eu-central-1.amazonaws.com/privatekeys-ml16/francfortpk.pem" >Download private key</a>
+                            </div>
+                          </li>
+
+                          <li>
+                            <div class="tab__title">
+                              <a class="h5" style="color:black; text-decoration:none;" href="{% url 'deleteInfra1' %}" >Delete Stack</a>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                      {% elif response == 'CREATE_IN_PROGRESS' and response1 == 'mediumModel' %}
+                      </br>
+                      <div class="row justify-content-center">
+                        <div class="alert bg--success">
+                          <div class="alert__body">
+                            <span>Your infrastructure will be available in few minutes ! </span>
+                          </div>
+                        </div>
+                      </div>
+                      {% elif response == 'DELETE_IN_PROGRESS' and response1 == 'mediumModel' %}
+                      </br>
+                      <div class="row justify-content-center">
+                        <div class="alert bg--error">
+                          <div class="alert__body">
+                            <span>Your infrastructure will be removed in few minutes !</span>
+                          </div>
+                        </div>
+                      </div>
+                      {% else %}
+                      </br>
+                      <div class="col-md-9">
+                        <a class="btn btn--primary type--uppercase" href="{% url 'createDefInfra3' %}">
+                          <span class="btn__text">Launch the build</span>
+                        </a>
+                      </div>
+                      {% endif %}
                     </div>
                     <div class="col-lg-5 col-md-6">
-                      <img alt="Image" class="border--round box-shadow-wide" src="{% static 'img/inner-2.jpg' %}" />
+                      <img alt="Image" class="border--round box-shadow-wide" src="{% static 'img/inner-4.jpg' %}" />
                     </div>
                   </div>
-                  <!--end of row-->
                 </div>
-                <!--end of container-->
               </section>
             </div>
           </li>
@@ -618,10 +748,10 @@
               <span class="h5">Large</span>
             </div>
             <div class="tab__content">
-              <section class="switchable ">
+              <section class="switchable bg--secondary" style="background:white;">
                 <div class="container">
                   <div class="row justify-content-between">
-                    <div class="col-md-6 switchable__text">
+                    <div class="col-md-7 switchable__text">
                       <ul class="accordion accordion-1">
                         <li>
                           <div class="accordion__title">
@@ -662,9 +792,51 @@
                           </div>
                         </li>
                       </ul>
+                      {% if response == 'CREATE_COMPLETE' and response1 == 'largeModel' %}
+                      <div class="tabs-container text-center" data-content-align="left">
+                        <ul class="tabs">
+                          <li>
+                            <div class="tab__title">
+                              <a class="h5" style="color:black; text-decoration:none;" href="https://s3.eu-central-1.amazonaws.com/privatekeys-ml16/francfortpk.pem" >Download private key</a>
+                            </div>
+                          </li>
+
+                          <li>
+                            <div class="tab__title">
+                              <a class="h5" style="color:black; text-decoration:none;" href="{% url 'deleteInfra1' %}" >Delete Stack</a>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                      {% elif response == 'CREATE_IN_PROGRESS' and response1 == 'largeModel' %}
+                      </br>
+                      <div class="row justify-content-center">
+                        <div class="alert bg--success">
+                          <div class="alert__body">
+                            <span>Your infrastructure will be available in few minutes ! </span>
+                          </div>
+                        </div>
+                      </div>
+                      {% elif response == 'DELETE_IN_PROGRESS' and response1 == 'largeModel' %}
+                      </br>
+                      <div class="row justify-content-center">
+                        <div class="alert bg--error">
+                          <div class="alert__body">
+                            <span>Your infrastructure will be removed in few minutes !</span>
+                          </div>
+                        </div>
+                      </div>
+                      {% else %}
+                      </br>
+                      <div class="col-md-9">
+                        <a class="btn btn--primary type--uppercase" href="{% url 'createDefInfra4' %}">
+                          <span class="btn__text">Launch the build</span>
+                        </a>
+                      </div>
+                      {% endif %}
                     </div>
-                    <div class="col-lg-5 col-md-5">
-                      <img alt="Image" class="border--round box-shadow-wide" src="{% static 'img/inner-2.jpg' %}" />
+                    <div class="col-lg-5 col-md-6">
+                      <img alt="Image" class="border--round box-shadow-wide" src="{% static 'img/inner-4.jpg' %}" />
                     </div>
                   </div>
                 </div>
@@ -674,33 +846,7 @@
         </ul>
       </div>
     </div>
-    </br>
   </div>
   {% endif %}
 </div>
 {% endblock %}
-<!-- </br>
-  <div class="boxed bg--secondary boxed--md boxed--border">
-    <div class="row justify-content-center">
-        <div class="col-md-12 col-lg-8">
-            <div class="wizard">
-                <h5>Intro</h5>
-                <section class="text-center">
-                    <div class="pos-vertical-center">
-                        <h4>Welcome to the Wizard, using jQuery Steps</h4>
-                    </div>
-                </section>
-                <h5>Navigation</h5>
-                <section class="text-center">
-                    <div class="pos-vertical-center">
-                        <h4>Navigate the steps using your keyboard arrows</h4>
-                    </div>
-                </section>
-                <h5>Finish</h5>
-                <section class="text-center">
-                    <div class="pos-vertical-center">
-                        <h4>Use Wizards for onboarding, form data collection and more</h4>
-                    </div>
-                </section>
-            </div>
-        </div> -->
