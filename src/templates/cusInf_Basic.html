@@ -10,79 +10,71 @@
       <h2>Compose your <b>own</b> infrastructure !</h2>
     </div>
   </div>
+  <div class="boxed boxed--border">
   <div class="col-md-12">
     <div class="row justify-content-center">
       <div class="col-md-12 col-lg-8">
         <div class="row justify-content-center">
           <h3>Basic configuration</h5>
         </div>
+      </br>
         <section style="background:white;">
-          <div class="col-md-12" style="margin-bottom:2%;">
-            <div style="float:left;">
-              <span><b>Infrastructure name:</b></span>
-            </div>
-            <input type="text" name="name" placeholder="Set a significant name" class="validate-required">
-          </div>
-          <form class="form-email row">
-            <div class="col-md-6" style="margin-left:3%;">
-              <span><b>Public subnets number :</b></span>
-              <div class="input-number">
-                <input type="number" name="quantity" placeholder="Quantity" value="0" min="0" max="4">
-                <div class="input-number__controls">
-                  <span class="input-number__increase"><i class="stack-up-open"></i></span>
-                  <span class="input-number__decrease"><i class="stack-down-open"></i></span>
-                </div>
+          <form class="site-form" action=" {% url 'cusInf_Basic' %} " method="POST">
+            {%csrf_token%}
+            <div class="col-md-12" style="margin-bottom:2%;">
+              <div align="center" >
+                <span ><b>Infrastructure name:</b></span>
+                {{form.infrastructure_name}}
               </div>
             </div>
-            <div class="col-md-6" style="margin-left:-3%;">
-              <span><b>Private subnets number :</b></span>
-              <div class="input-number">
-                <input type="number" name="quantity" placeholder="Quantity" value="0" min="0" max="4">
-                <div class="input-number__controls">
-                  <span class="input-number__increase"><i class="stack-up-open"></i></span>
-                  <span class="input-number__decrease"><i class="stack-down-open"></i></span>
+            <div class="row">
+              <div class="col-md-4"  style="margin-left:15%;">
+                <div align="center" >
+                  <span><b>Public subnets number :</b></span>
                 </div>
+                {{form.infrastructure_pubsub}}
+              </div>
+              <div class="col-md-4">
+                <div align="center" >
+                  <span><b>Private subnets number :</b></span>
+                </div>
+                {{form.infrastructure_prvsub}}
               </div>
             </div>
-            <div class="col-md-12" style="margin-left:3%;">
-              <span><b>Network ACLs number :</b></span>
-              <div class="input-number">
-                <input type="number" name="quantity" placeholder="Quantity" value="0" min="0" max="4">
-                <div class="input-number__controls">
-                  <span class="input-number__increase"><i class="stack-up-open"></i></span>
-                  <span class="input-number__decrease"><i class="stack-down-open"></i></span>
+            <div class="row">
+              <div class="col-md-4" style="margin-left:7%;">
+                <div align="center" >
+                  <span><b>Network ACLs number :</b></span>
                 </div>
+                {{form.infrastructure_nacl}}
+              </div>
+              <div class="col-md-4" style="margin-left:21%;">
+                <div align="center" >
+                  <span><b>Security groups number :</b></span>
+                </div>
+                {{form.infrastructure_sg}}
               </div>
             </div>
-            <div class="col-md-12" style="margin-left:3%;">
-              <span><b>Security groups number :</b></span>
-              <div class="input-number">
-                <input type="number" name="quantity" placeholder="Quantity" value="0" min="0" max="4">
-                <div class="input-number__controls">
-                  <span class="input-number__increase"><i class="stack-up-open"></i></span>
-                  <span class="input-number__decrease"><i class="stack-down-open"></i></span>
+            <div class="row">
+              <div class="col-md-4">
+                <div align="center" >
+                  <span><b>Public instances number :</b></span>
                 </div>
+                {{form.infrastructure_pubinst}}
+              </div>
+              <div class="col-md-4" style="margin-left:33%;">
+                <div align="center" >
+                  <span><b>Private instances number :</b></span>
+                </div>
+                {{form.infrastructure_prvinst}}
               </div>
             </div>
-            <div class="col-md-12" style="margin-left:3%;">
-              <span><b>Instances number :</b></span>
-              <div class="input-number">
-                <input type="number" name="quantity" placeholder="Quantity" value="0" min="0" max="4">
-                <div class="input-number__controls">
-                  <span class="input-number__increase"><i class="stack-up-open"></i></span>
-                  <span class="input-number__decrease"><i class="stack-down-open"></i></span>
-                </div>
-              </div>
-            </div>
+            <input type="submit" value="Next">
           </form>
         </section>
-        <div class="row justify-content-center" style="margin-top:3%;">
-          <a class="btn btn--primary type--uppercase" style="margin-top:2%;" href="{% url 'cusInf_NACL' %}">
-            <span class="btn__text">next</span>
-          </a>
-        </div>
       </div>
     </div>
   </div>
+</div>
 </div>
 {% endblock %}

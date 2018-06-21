@@ -293,7 +293,7 @@
                 "KeyName" : "francfortpk",
                 "Tags" : [{"Key" : "Name", "Value" : "PriEc2CF"}],
                 "NetworkInterfaces" : [{
-                    "AssociatePublicIpAddress" : "true",
+                    "AssociatePublicIpAddress" : "false",
                     "DeviceIndex" : "0",
                     "DeleteOnTermination" : "true",
                     "SubnetId" : { "Ref" : "PriSub1CF" },

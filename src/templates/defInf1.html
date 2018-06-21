@@ -5,6 +5,7 @@
     <li><a href="{% url 'user' %}">Main menu</a></li>
     <li>Default infrastructure</li>
   </ol>
+  <!-- {% if val == 'CREATE_COMPLETE' and val1 == user.username %}
   <div class="col-md-12">
     <div class="row justify-content-center">
       <h2>Choose the best <b>model</b> for your infrastructure !</h2>
@@ -64,22 +65,29 @@
                         </li>
                       </ul>
                       {% if val == 'CREATE_COMPLETE' and val1 == user.username and val2 == 'tiny' %}
+                      <div class="row justify-content-center">
+                        <div class="alert bg--primary">
+                          <div class="alert__body">
+                            <span>Your infrastructure is available now ! </span>
+                          </div>
+                        </div>
+                      </div>
+                      </br>
                       <div class="tabs-container text-center" data-content-align="left">
                         <ul class="tabs">
                           <li>
                             <div class="tab__title">
-                              <a class="h5" style="color:black; text-decoration:none;" href="https://s3.eu-central-1.amazonaws.com/privatekeys-ml16/francfortpk.pem" >Download private key</a>
+                              <a class="h5" style="color:black; text-decoration:none;" href="https://s3.eu-central-1.amazonaws.com/privatekeys-ml16/francfortpk.pem">Download private key</a>
                             </div>
                           </li>
                           <li>
                             <div class="tab__title">
-                              <a class="h5" style="color:black; text-decoration:none;" href="{% url 'deleteInfra1' %}" >Delete Stack</a>
+                              <a class="h5" style="color:black; text-decoration:none;" href="{% url 'deleteInfra1' %}">Delete Stack</a>
                             </div>
                           </li>
                         </ul>
                       </div>
-                    </br>
-                      {% elif val == 'CREATE_IN_PROGRESS' and val1 == user.username and val2 == 'tiny' %}
+                      {% elif response == 'CREATE_IN_PROGRESS' and val1 == user.username and val2 == 'tiny' %}
                       </br>
                       <div class="row justify-content-center">
                         <div class="alert bg--success">
@@ -88,7 +96,8 @@
                           </div>
                         </div>
                       </div>
-                      {% elif val == 'DELETE_IN_PROGRESS' and val1 == user.username and val2 == 'tiny' %}
+                      {% elif response == 'DELETE_IN_PROGRESS' and val1 == user.username and val2 == 'tiny' %}
+                      </br>
                       <div class="row justify-content-center">
                         <div class="alert bg--error">
                           <div class="alert__body">
@@ -196,23 +205,31 @@
                           </div>
                         </li>
                       </ul>
-                      {% if val == 'CREATE_COMPLETE' and val1 == user.username and val2 == 'micro' %}
+                      {% if val == 'CREATE_COMPLETE' and val1 == user.username and val2 == 'micro'%}
+                      <div class="row justify-content-center">
+                        <div class="alert bg--primary">
+                          <div class="alert__body">
+                            <span>Your infrastructure is available now ! </span>
+                          </div>
+                        </div>
+                      </div>
+                      </br>
                       <div class="tabs-container text-center" data-content-align="left">
                         <ul class="tabs">
                           <li>
                             <div class="tab__title">
-                              <a class="h5" style="color:black; text-decoration:none;" href="https://s3.eu-central-1.amazonaws.com/privatekeys-ml16/francfortpk.pem" >Download private key</a>
+                              <a class="h5" style="color:black; text-decoration:none;" href="https://s3.eu-central-1.amazonaws.com/privatekeys-ml16/francfortpk.pem">Download private key</a>
                             </div>
                           </li>
 
                           <li>
                             <div class="tab__title">
-                              <a class="h5" style="color:black; text-decoration:none;" href="{% url 'deleteInfra2' %}" >Delete Stack</a>
+                              <a class="h5" style="color:black; text-decoration:none;" href="{% url 'deleteInfra1' %}">Delete Stack</a>
                             </div>
                           </li>
                         </ul>
                       </div>
-                      {% elif val == 'CREATE_IN_PROGRESS' and val1 == user.username and val2 == 'micro' %}
+                      {% elif response == 'CREATE_IN_PROGRESS' and val1 == user.username and val2 == 'micro' %}
                       </br>
                       <div class="row justify-content-center">
                         <div class="alert bg--success">
@@ -221,7 +238,7 @@
                           </div>
                         </div>
                       </div>
-                      {% elif val == 'DELETE_IN_PROGRESS' and val1 == user.username and val2 == 'micro' %}
+                      {% elif response == 'DELETE_IN_PROGRESS' and val1 == user.username and val2 == 'micro' %}
                       </br>
                       <div class="row justify-content-center">
                         <div class="alert bg--error">
@@ -244,7 +261,7 @@
                   </div>
                   {% if val == 'CREATE_COMPLETE' and val1 == user.username and val2 == 'micro'%}
                   </br>
-                  <div class="boxed bg--secondary boxed--md boxed--border" style="background:white;">
+                  <div class="boxed bg--secondary boxed--md boxed--border" >
                     <div class="row justify-content-center">
                       <div class="col-md-12 col-lg-8">
                         <div class="wizard">
@@ -329,15 +346,149 @@
                             </p>
                           </div>
                         </li>
-                        <li>
-                        <form class="site-form" action=" {% url 'createDefInfra3' %} " method="POST">
-                          {%csrf_token%}
-                          {{form}}
-                          <input type="submit" value="Build your default infrastructure">
-                        </form>
-                      </li>
                       </ul>
-                      {% if val == 'CREATE_COMPLETE' and val1 == user.username and val2 == 'medium' %}
+                      <div class="col-md-9">
+                        <a class="btn btn--primary type--uppercase" href="{% url 'createDefInfra3' %}">
+                          <span class="btn__text">Launch the build</span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="col-lg-5 col-md-6">
+                      <img alt="Image" class="border--round box-shadow-wide" src="{% static 'img/inner-4.jpg' %}" />
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </li>
+          <li>
+            <div class="tab__title">
+              <span class="h5">Large</span>
+            </div>
+            <div class="tab__content">
+              <section class="switchable bg--secondary" style="background:white;">
+                <div class="container">
+                  <div class="row justify-content-between">
+                    <div class="col-md-7 switchable__text">
+                      <ul class="accordion accordion-1">
+                        <li>
+                          <div class="accordion__title">
+                            <span class="h5">Code Quality</span>
+                          </div>
+                          <div class="accordion__content">
+                            <p class="lead">
+                              Stack follows the BEM naming convention that focusses on logical code readability that is reflected in both the HTML and CSS. Interactive elements such as accordions and tabs follow the same markup patterns making rapid development easier for developers
+                              and beginners alike.
+                            </p>
+                            <p class="lead">
+                              Add to this the thoughtfully presented documentation, featuring code highlighting, snippets, class customizer explanation and you've got yourself one powerful value package.
+                            </p>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="accordion__title">
+                            <span class="h5">Visual Design</span>
+                          </div>
+                          <div class="accordion__content">
+                            <p class="lead">
+                              Stack offers a clean and contemporary to suit a range of purposes from corporate, tech startup, marketing site to digital storefront. Elements have been designed to showcase content in a diverse yet consistent manner.
+                            </p>
+                            <p class="lead">
+                              Multiple font and colour scheme options mean that dramatically altering the look of your site is just clicks away &mdash; Customizing your site in the included Variant Page Builder makes experimenting with styles and content arrangements dead simple.
+                            </p>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="accordion__title">
+                            <span class="h5">Stack Experience</span>
+                          </div>
+                          <div class="accordion__content">
+                            <p class="lead">
+                              Medium Rare is an elite author known for offering high-quality, high-value products backed by timely and personable support. Recognised and awarded by Envato on multiple occasions for producing consistently outstanding products, it's no wonder over 20,000
+                              customers enjoy using Medium Rare templates.
+                            </p>
+                          </div>
+                        </li>
+                      </ul>
+                      <div class="col-md-9">
+                        <a class="btn btn--primary type--uppercase" href="{% url 'createDefInfra4' %}">
+                          <span class="btn__text">Launch the build</span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="col-lg-5 col-md-6">
+                      <img alt="Image" class="border--round box-shadow-wide" src="{% static 'img/inner-4.jpg' %}" />
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  {% else %} -->
+  <div class="col-md-12">
+    <div class="row justify-content-center">
+      <h2>Choose the best <b>model</b> for your infrastructure !</h2>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="boxed bg--secondary boxed--lg boxed--border" style="background:white;">
+      <div class="tabs-container text-center" data-content-align="left">
+        <ul class="tabs">
+          <li class="active">
+            <div class="tab__title">
+              <span class="h5">Tiny</span>
+            </div>
+            <div class="tab__content">
+              <section class="switchable bg--secondary" style="background:white;">
+                <div class="container">
+                  <div class="row justify-content-between">
+                    <div class="col-md-7 switchable__text">
+                      <ul class="accordion accordion-1">
+                        <li>
+                          <div class="accordion__title">
+                            <span class="h5">Code Quality</span>
+                          </div>
+                          <div class="accordion__content">
+                            <p class="lead">
+                              Stack follows the BEM naming convention that focusses on logical code readability that is reflected in both the HTML and CSS. Interactive elements such as accordions and tabs follow the same markup patterns making rapid development easier for developers
+                              and beginners alike.
+                            </p>
+                            <p class="lead">
+                              Add to this the thoughtfully presented documentation, featuring code highlighting, snippets, class customizer explanation and you've got yourself one powerful value package.
+                            </p>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="accordion__title">
+                            <span class="h5">Visual Design</span>
+                          </div>
+                          <div class="accordion__content">
+                            <p class="lead">
+                              Stack offers a clean and contemporary to suit a range of purposes from corporate, tech startup, marketing site to digital storefront. Elements have been designed to showcase content in a diverse yet consistent manner.
+                            </p>
+                            <p class="lead">
+                              Multiple font and colour scheme options mean that dramatically altering the look of your site is just clicks away &mdash; Customizing your site in the included Variant Page Builder makes experimenting with styles and content arrangements dead simple.
+                            </p>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="accordion__title">
+                            <span class="h5">Stack Experience</span>
+                          </div>
+                          <div class="accordion__content">
+                            <p class="lead">
+                              Medium Rare is an elite author known for offering high-quality, high-value products backed by timely and personable support. Recognised and awarded by Envato on multiple occasions for producing consistently outstanding products, it's no wonder over 20,000
+                              customers enjoy using Medium Rare templates.
+                            </p>
+                          </div>
+                        </li>
+
+                      </ul>
+                        {% if val == 'CREATE_COMPLETE' and val1 == user.username and val2 == 'tiny' %}
                       <div class="tabs-container text-center" data-content-align="left">
                         <ul class="tabs">
                           <li>
@@ -353,7 +504,7 @@
                           </li>
                         </ul>
                       </div>
-                      {% elif val == 'CREATE_IN_PROGRESS' and val1 == user.username and val2 == 'medium' %}
+                      {% elif val == 'CREATE_IN_PROGRESS' and val1 == user.username and val2 == 'tiny' %}
                       </br>
                       <div class="row justify-content-center">
                         <div class="alert bg--success">
@@ -362,7 +513,113 @@
                           </div>
                         </div>
                       </div>
-                      {% elif val == 'DELETE_IN_PROGRESS' and val1 == user.username and val2 == 'medium' %}
+                      {% elif val == 'DELETE_IN_PROGRESS' and val1 == user.username and val2 == 'tiny' %}
+                      </br>
+                      <div class="row justify-content-center">
+                        <div class="alert bg--error">
+                          <div class="alert__body">
+                            <span>Your infrastructure will be removed in few minutes !</span>
+                          </div>
+                        </div>
+                      </div>
+                      {% else %}
+                      <form class="site-form" action=" {% url 'createDefInfra1' %} " method="POST">
+                        {%csrf_token%}
+                        {{form}}
+                        <input type="submit" value="Build your default infrastructure">
+                      </form>
+                      {% endif %}
+                    </div>
+                    <div class="col-lg-5 col-md-6">
+                      <img alt="Image" class="border--round box-shadow-wide" src="{% static 'img/inner-4.jpg' %}" />
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </li>
+          <li>
+            <div class="tab__title">
+              <span class="h5">Micro</span>
+            </div>
+            <div class="tab__content">
+              <section class="switchable bg--secondary" style="background:white;">
+                <div class="container">
+                  <div class="row justify-content-between">
+                    <div class="col-md-7 switchable__text">
+                      <ul class="accordion accordion-1">
+                        <li>
+                          <div class="accordion__title">
+                            <span class="h5">Code Quality</span>
+                          </div>
+                          <div class="accordion__content">
+                            <p class="lead">
+                              Stack follows the BEM naming convention that focusses on logical code readability that is reflected in both the HTML and CSS. Interactive elements such as accordions and tabs follow the same markup patterns making rapid development easier for developers
+                              and beginners alike.
+                            </p>
+                            <p class="lead">
+                              Add to this the thoughtfully presented documentation, featuring code highlighting, snippets, class customizer explanation and you've got yourself one powerful value package.
+                            </p>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="accordion__title">
+                            <span class="h5">Visual Design</span>
+                          </div>
+                          <div class="accordion__content">
+                            <p class="lead">
+                              Stack offers a clean and contemporary to suit a range of purposes from corporate, tech startup, marketing site to digital storefront. Elements have been designed to showcase content in a diverse yet consistent manner.
+                            </p>
+                            <p class="lead">
+                              Multiple font and colour scheme options mean that dramatically altering the look of your site is just clicks away &mdash; Customizing your site in the included Variant Page Builder makes experimenting with styles and content arrangements dead simple.
+                            </p>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="accordion__title">
+                            <span class="h5">Stack Experience</span>
+                          </div>
+                          <div class="accordion__content">
+                            <p class="lead">
+                              Medium Rare is an elite author known for offering high-quality, high-value products backed by timely and personable support. Recognised and awarded by Envato on multiple occasions for producing consistently outstanding products, it's no wonder over 20,000
+                              customers enjoy using Medium Rare templates.
+                            </p>
+                          </div>
+                        </li>
+                        <li>
+                        <form class="site-form" action=" {% url 'createDefInfra2' %} " method="POST">
+                          {%csrf_token%}
+                          {{form}}
+                          <input type="submit" value="Build your default infrastructure">
+                        </form>
+                      </li>
+                      </ul>
+                      {% if val == 'CREATE_COMPLETE' and val1 == user.username and val2 == 'micro' %}
+                      <div class="tabs-container text-center" data-content-align="left">
+                        <ul class="tabs">
+                          <li>
+                            <div class="tab__title">
+                              <a class="h5" style="color:black; text-decoration:none;" href="https://s3.eu-central-1.amazonaws.com/privatekeys-ml16/francfortpk.pem" >Download private key</a>
+                            </div>
+                          </li>
+
+                          <li>
+                            <div class="tab__title">
+                              <a class="h5" style="color:black; text-decoration:none;" href="{% url 'deleteInfra2' %}" >Delete Stack</a>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                      {% elif response == 'CREATE_IN_PROGRESS' and val1 == user.username and val2 == 'micro' %}
+                      </br>
+                      <div class="row justify-content-center">
+                        <div class="alert bg--success">
+                          <div class="alert__body">
+                            <span>Your infrastructure will be available in few minutes ! </span>
+                          </div>
+                        </div>
+                      </div>
+                      {% elif response == 'DELETE_IN_PROGRESS' and val1 == user.username and val2 == 'micro' %}
                       </br>
                       <div class="row justify-content-center">
                         <div class="alert bg--error">
@@ -377,41 +634,106 @@
                       <img alt="Image" class="border--round box-shadow-wide" src="{% static 'img/inner-4.jpg' %}" />
                     </div>
                   </div>
-                  {% if val == 'CREATE_COMPLETE' and val1 == user.username and val2 == 'medium'%}
-                  </br>
-                  <div class="boxed bg--secondary boxed--md boxed--border" style="background:white;">
-                    <div class="row justify-content-center">
-                      <div class="col-md-12 col-lg-8">
-                        <div class="wizard">
-                          <h5>Private key</h5>
-                          <section class="text-center">
-                            <div class="pos-vertical-center">
-                              <h4>Download the private key !</h4>
+                </div>
+              </section>
+            </div>
+          </li>
+          <li>
+            <div class="tab__title">
+              <span class="h5">Medium</span>
+            </div>
+            <div class="tab__content">
+              <section class="switchable bg--secondary" style="background:white;">
+                <div class="container">
+                  <div class="row justify-content-between">
+                    <div class="col-md-7 switchable__text">
+                      <ul class="accordion accordion-1">
+                        <li>
+                          <div class="accordion__title">
+                            <span class="h5">Code Quality</span>
+                          </div>
+                          <div class="accordion__content">
+                            <p class="lead">
+                              Stack follows the BEM naming convention that focusses on logical code readability that is reflected in both the HTML and CSS. Interactive elements such as accordions and tabs follow the same markup patterns making rapid development easier for developers
+                              and beginners alike.
+                            </p>
+                            <p class="lead">
+                              Add to this the thoughtfully presented documentation, featuring code highlighting, snippets, class customizer explanation and you've got yourself one powerful value package.
+                            </p>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="accordion__title">
+                            <span class="h5">Visual Design</span>
+                          </div>
+                          <div class="accordion__content">
+                            <p class="lead">
+                              Stack offers a clean and contemporary to suit a range of purposes from corporate, tech startup, marketing site to digital storefront. Elements have been designed to showcase content in a diverse yet consistent manner.
+                            </p>
+                            <p class="lead">
+                              Multiple font and colour scheme options mean that dramatically altering the look of your site is just clicks away &mdash; Customizing your site in the included Variant Page Builder makes experimenting with styles and content arrangements dead simple.
+                            </p>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="accordion__title">
+                            <span class="h5">Stack Experience</span>
+                          </div>
+                          <div class="accordion__content">
+                            <p class="lead">
+                              Medium Rare is an elite author known for offering high-quality, high-value products backed by timely and personable support. Recognised and awarded by Envato on multiple occasions for producing consistently outstanding products, it's no wonder over 20,000
+                              customers enjoy using Medium Rare templates.
+                            </p>
+                          </div>
+                        </li>
+                        <li>
+                        <form class="site-form" action=" {% url 'createDefInfra3' %} " method="POST">
+                          {%csrf_token%}
+                          {{form}}
+                          <input type="submit" value="Build your default infrastructure">
+                        </form>
+                      </li>
+                      </ul>
+                      {% if response == 'CREATE_COMPLETE' and val1 == user.username and val2 == 'medium' %}
+                      <div class="tabs-container text-center" data-content-align="left">
+                        <ul class="tabs">
+                          <li>
+                            <div class="tab__title">
+                              <a class="h5" style="color:black; text-decoration:none;" href="https://s3.eu-central-1.amazonaws.com/privatekeys-ml16/francfortpk.pem" >Download private key</a>
                             </div>
-                          </section>
-                          <h5>Permission</h5>
-                          <section class="text-center">
-                            <div class="pos-vertical-center">
-                              <h4>Change key permissions via the command:</h4>
-                              <h4><b>chmod 400 francfortpk.pem</b></h4>
+                          </li>
+
+                          <li>
+                            <div class="tab__title">
+                              <a class="h5" style="color:black; text-decoration:none;" href="{% url 'deleteInfra1' %}" >Delete Stack</a>
                             </div>
-                          </section>
-                          <h5>Connect</h5>
-                          <section class="text-center">
-                            <div class="pos-vertical-center">
-                              <h4>Connect to your instances via this ssh command:</h4>
-                              </hr>
-                              <h4 style="color:#4d92df;"><b>Instance 1:</b> </h4>
-                              <h4>ssh -i "francfortpk.pem" ec2-user@<b>{{ip1}}</b><h4>
-                              <h4 style="color:#4d92df;"><b>Instance 2:</b> </h4>
-                              <h4>ssh -i "francfortpk.pem" ec2-user@<b>{{ip2}}</b><h4>
-                              </div>
-                            </section>
+                          </li>
+                        </ul>
+                      </div>
+                      {% elif response == 'CREATE_IN_PROGRESS' and val1 == user.username and val2 == 'medium' %}
+                      </br>
+                      <div class="row justify-content-center">
+                        <div class="alert bg--success">
+                          <div class="alert__body">
+                            <span>Your infrastructure will be available in few minutes ! </span>
                           </div>
                         </div>
+                      </div>
+                      {% elif response == 'DELETE_IN_PROGRESS' and val1 == user.username and val2 == 'medium' %}
+                      </br>
+                      <div class="row justify-content-center">
+                        <div class="alert bg--error">
+                          <div class="alert__body">
+                            <span>Your infrastructure will be removed in few minutes !</span>
+                          </div>
+                        </div>
+                      </div>
+                      {% endif %}
+                    </div>
+                    <div class="col-lg-5 col-md-6">
+                      <img alt="Image" class="border--round box-shadow-wide" src="{% static 'img/inner-4.jpg' %}" />
                     </div>
                   </div>
-                  {% endif %}
                 </div>
               </section>
             </div>
@@ -472,7 +794,7 @@
                         </form>
                       </li>
                       </ul>
-                      {% if val == 'CREATE_COMPLETE' and val1 == user.username and val2 == 'large' %}
+                      {% if response == 'CREATE_COMPLETE' and val1 == user.username and val2 == 'large' %}
                       <div class="tabs-container text-center" data-content-align="left">
                         <ul class="tabs">
                           <li>
@@ -488,7 +810,7 @@
                           </li>
                         </ul>
                       </div>
-                      {% elif val == 'CREATE_IN_PROGRESS' and val1 == user.username and val2 == 'large' %}
+                      {% elif response == 'CREATE_IN_PROGRESS' and val1 == user.username and val2 == 'large' %}
                       </br>
                       <div class="row justify-content-center">
                         <div class="alert bg--success">
@@ -497,7 +819,7 @@
                           </div>
                         </div>
                       </div>
-                      {% elif val == 'DELETE_IN_PROGRESS' and val1 == user.username and val2 == 'large' %}
+                      {% elif response == 'DELETE_IN_PROGRESS' and val1 == user.username and val2 == 'large' %}
                       </br>
                       <div class="row justify-content-center">
                         <div class="alert bg--error">
@@ -512,41 +834,6 @@
                       <img alt="Image" class="border--round box-shadow-wide" src="{% static 'img/inner-4.jpg' %}" />
                     </div>
                   </div>
-                  {% if val == 'CREATE_COMPLETE' and val1 == user.username and val2 == 'large'%}
-                  </br>
-                  <div class="boxed bg--secondary boxed--md boxed--border" style="background:white;">
-                    <div class="row justify-content-center">
-                      <div class="col-md-12 col-lg-8">
-                        <div class="wizard">
-                          <h5>Private key</h5>
-                          <section class="text-center">
-                            <div class="pos-vertical-center">
-                              <h4>Download the private key !</h4>
-                            </div>
-                          </section>
-                          <h5>Permission</h5>
-                          <section class="text-center">
-                            <div class="pos-vertical-center">
-                              <h4>Change key permissions via the command:</h4>
-                              <h4><b>chmod 400 francfortpk.pem</b></h4>
-                            </div>
-                          </section>
-                          <h5>Connect</h5>
-                          <section class="text-center">
-                            <div class="pos-vertical-center">
-                              <h4>Connect to your instances via this ssh command:</h4>
-                              </hr>
-                              <h4 style="color:#4d92df;"><b>Instance 1:</b> </h4>
-                              <h4>ssh -i "francfortpk.pem" ec2-user@<b>{{ip1}}</b><h4>
-                              <h4 style="color:#4d92df;"><b>Instance 2:</b> </h4>
-                              <h4>ssh -i "francfortpk.pem" ec2-user@<b>{{ip2}}</b><h4>
-                              </div>
-                            </section>
-                          </div>
-                        </div>
-                    </div>
-                  </div>
-                  {% endif %}
                 </div>
               </section>
             </div>
@@ -555,5 +842,6 @@
       </div>
     </div>
   </div>
+  {% endif %}
 </div>
 {% endblock %}

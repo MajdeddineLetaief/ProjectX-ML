@@ -8,7 +8,7 @@ from .models import DefaultStack
 from .import forms
 import boto3
 import json
-#########################################################
+###
 def home(request):
     title = 'Welcome'
     form = SignUpForm(request.POST or None)
@@ -24,7 +24,7 @@ def home(request):
         "home_title" : "Thank you !"
     }
     return render(request, "home.html", context)
-#########################################################
+###
 def contact(request):
      form = ContactForm(request.POST or None)
      if form.is_valid():
@@ -43,44 +43,41 @@ def contact(request):
         "contact_form" : form,
      }
      return render(request, "forms.html", context)
-#########################################################
+###
 @login_required
 def user(request):
-    return render(request, "user.html", {})
-#########################################################
+    if request.method == 'POST':
+         form = forms.createInfra(request.POST)
+         if form.is_valid():
+             var = form.save(commit=False)
+             var.infrastructure_owner = request.user
+             var.save()
+             return render(request,"defInf.html",{})
+    else:
+        form = forms.createInfra()
+    return render(request, "user.html", {'form': form})
+###
 @login_required
 def cusInf_Basic(request):
-    if request.method == 'POST':
-        form = forms.customInfra(request.POST)
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.infrastructure_owner = request.user
-            instance.save()
-            context = {
-               "infrastructure_nacl":instance.infrastructure_nacl,
-            }
-        return render(request, "cusInf_NACL.html", context)
-    else :
-        form = forms.customInfra()
-        return render(request, "cusInf_Basic.html", {"form" : form})
-#########################################################
+    return render(request, "cusInf_Basic.html", {})
+
 @login_required
 def cusInf_NACL(request):
     return render(request, "cusInf_NACL.html", {})
-#########################################################
+
 @login_required
 def cusInf_SG(request):
     return render(request, "cusInf_SG.html", {})
-#########################################################
+
 @login_required
 def cusInf_Instance(request):
     return render(request, "cusInf_Instance.html", {})
-#########################################################
+###
 @login_required
 def createInfra(request):
     form = forms.createInfra()
     return render(request, "defInf.html", {"form" : form})
-#########################################################
+###
 @login_required
 def defInf(request):
     title = 'Default Infrastructure'
@@ -90,14 +87,11 @@ def defInf(request):
     global ip_add1, ip_add2
     if request.method == 'POST':
          form = forms.createInfra(request.POST)
-         if form.is_valid() :
+         if form.is_valid():
              instance = form.save(commit=False)
              instance.infrastructure_owner = request.user
              instance.save()
-             context = {
-                "from":form,
-             }
-             return render(request,"defInf.html",context)
+             return render(request,"defInf.html",{})
     else:
         form = forms.createInfra()
     for each in response['Stacks']:
@@ -107,38 +101,6 @@ def defInf(request):
         value2 = each['StackName']
         value3 = value0.split('2')[1]
         if value1 == str(request.user) and value3 == 'tiny':
-            response1 = client.describe_stack_resources(
-                StackName = value2
-            )
-            if value == 'CREATE_COMPLETE':
-                for each in response1['StackResources']:
-                    if each['LogicalResourceId'] == 'PublicEc2':
-                        inst_id = each['PhysicalResourceId']
-                        response2 = client1.describe_instances(Filters=[{'Name': 'instance-id','Values': [inst_id,]},],)
-                        for each in response2['Reservations']:
-                            ip_add1 = each['Instances'][0]['PublicIpAddress']
-                for each in response1['StackResources']:
-                    if each['LogicalResourceId'] == 'PrivateEc2':
-                        inst_id = each['PhysicalResourceId']
-                        response2 = client1.describe_instances(Filters=[{'Name': 'instance-id','Values': [inst_id,]},],)
-                        for each in response2['Reservations']:
-                            ip_add2= each['Instances'][0]['PrivateIpAddress']
-                context = {
-                    "val" : value,
-                    "val1" : value1,
-                    "val2" : value3,
-                    "ip1" : ip_add1,
-                    "ip2" : ip_add2,
-                    "form" : form,
-                }
-                return render(request, "defInf.html", context)
-            else :
-                context = {
-                    "response" : value,
-                    "form" : form,
-                }
-                return render(request, "defInf.html", context)
-        if value1 == str(request.user) and value3 == 'micro':
             response1= client.describe_stack_resources(
                 StackName = value2
             )
@@ -161,16 +123,14 @@ def defInf(request):
                     "val2" : value3,
                     "ip1" : ip_add1,
                     "ip2" : ip_add2,
-                    "form" : form,
                 }
                 return render(request, "defInf.html", context)
             else :
                 context = {
                     "response" : value,
-                    "form" : form,
                 }
                 return render(request, "defInf.html", context)
-        if value1 == str(request.user) and value3 == 'medium':
+        elif value1 == str(request.user) and value3 == 'micro':
             response1= client.describe_stack_resources(
                 StackName = value2
             )
@@ -193,16 +153,14 @@ def defInf(request):
                     "val2" : value3,
                     "ip1" : ip_add1,
                     "ip2" : ip_add2,
-                    "form" : form,
                 }
                 return render(request, "defInf.html", context)
             else :
                 context = {
                     "response" : value,
-                    "form" : form,
                 }
                 return render(request, "defInf.html", context)
-        if value1 == str(request.user) and value3 == 'large':
+        elif value1 == str(request.user) and value3 == 'medium':
             response1= client.describe_stack_resources(
                 StackName = value2
             )
@@ -225,20 +183,45 @@ def defInf(request):
                     "val2" : value3,
                     "ip1" : ip_add1,
                     "ip2" : ip_add2,
-                    "form" : form,
                 }
                 return render(request, "defInf.html", context)
             else :
                 context = {
                     "response" : value,
-                    "form" : form,
+                }
+                return render(request, "defInf.html", context)
+        elif value1 == str(request.user) and value3 == 'large':
+            response1= client.describe_stack_resources(
+                StackName = value2
+            )
+            if value == 'CREATE_COMPLETE':
+                for each in response1['StackResources']:
+                    if each['LogicalResourceId'] == 'PublicEc2':
+                        inst_id = each['PhysicalResourceId']
+                        response2 = client1.describe_instances(Filters=[{'Name': 'instance-id','Values': [inst_id,]},],)
+                        for each in response2['Reservations']:
+                            ip_add1 = each['Instances'][0]['PublicIpAddress']
+                for each in response1['StackResources']:
+                    if each['LogicalResourceId'] == 'PrivateEc2':
+                        inst_id = each['PhysicalResourceId']
+                        response2 = client1.describe_instances(Filters=[{'Name': 'instance-id','Values': [inst_id,]},],)
+                        for each in response2['Reservations']:
+                            ip_add2= each['Instances'][0]['PrivateIpAddress']
+                context = {
+                    "val" : value,
+                    "val1" : value1,
+                    "val2" : value3,
+                    "ip1" : ip_add1,
+                    "ip2" : ip_add2,
+                }
+                return render(request, "defInf.html", context)
+            else :
+                context = {
+                    "response" : value,
                 }
                 return render(request, "defInf.html", context)
         else :
-            context = {
-                "form" : form,
-            }
-            return render(request, "defInf.html", context)
+            return render(request, "defInf.html", {"form" : form})
         # # # value1 = each['StackName']
         # # if value1 == 'tinyModel':
         # #     response1= client.describe_stack_resources(
@@ -365,7 +348,8 @@ def defInf(request):
         #     # print value1
         #     # print value
     return render(request, "defInf.html", {"form" : form})
-#########################################################
+
+###
 @login_required
 def createDefInfra1(request):
     if request.method == 'POST':
@@ -384,7 +368,7 @@ def createDefInfra1(request):
     else:
         form = forms.createInfra()
         return render(request, "user.html", {'form':form})
-#########################################################
+
 @login_required
 def createDefInfra2(request):
     if request.method == 'POST':
@@ -403,7 +387,7 @@ def createDefInfra2(request):
     else:
         form = forms.createInfra()
         return render(request, "user.html", {'form':form})
-#########################################################
+
 @login_required
 def createDefInfra3(request):
     if request.method == 'POST':
@@ -422,7 +406,7 @@ def createDefInfra3(request):
     else:
         form = forms.createInfra()
         return render(request, "user.html", {'form':form})
-#########################################################
+
 @login_required
 def createDefInfra4(request):
     if request.method == 'POST':
@@ -441,7 +425,7 @@ def createDefInfra4(request):
     else:
         form = forms.createInfra()
         return render(request, "user.html", {'form':form})
-#########################################################
+###
 @login_required
 def deleteInfra1(request):
     client = boto3.client('cloudformation')
@@ -449,7 +433,7 @@ def deleteInfra1(request):
         StackName='tinyModel',
     )
     return render(request, "user.html", {})
-#########################################################
+
 @login_required
 def deleteInfra2(request):
     client = boto3.client('cloudformation')
@@ -457,7 +441,7 @@ def deleteInfra2(request):
         StackName='microModel',
     )
     return render(request, "user.html", {})
-#########################################################
+
 @login_required
 def deleteInfra3(request):
     client = boto3.client('cloudformation')
@@ -465,7 +449,7 @@ def deleteInfra3(request):
         StackName='mediumModel',
     )
     return render(request, "user.html", {})
-#########################################################
+
 @login_required
 def deleteInfra4(request):
     client = boto3.client('cloudformation')

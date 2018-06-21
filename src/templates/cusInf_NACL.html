@@ -16,7 +16,8 @@
         <div class="row justify-content-center">
           <h3>NACLs configuration</h5>
         </div>
-        <div class="boxed boxed--border">
+          {% if infrastructure_nacl == 1 %}
+          <div class="boxed boxed--border">
           <form class="text-left form-email row" data-success="Thanks for your enquiry, we'll be in touch shortly." data-error="Please fill in all fields correctly.">
             <div class="col-md-12 text-center boxed" style="margin-bottom:-4%; margin-top:-4%;">
               <h5>NACL1</h5>
@@ -88,7 +89,668 @@
               </div>
             </div>
           </form>
-        </div>
+          </div>
+          {% elif infrastructure_nacl == 2 %}
+          <div class="boxed boxed--border">
+          <form class="text-left form-email row" data-success="Thanks for your enquiry, we'll be in touch shortly." data-error="Please fill in all fields correctly.">
+            <div class="col-md-12 text-center boxed" style="margin-bottom:-4%; margin-top:-4%;">
+              <h5>NACL1</h5>
+            </div>
+            <div class="col-md-12">
+              <span><b>Source IP:</b></span>
+              <input type="text" name="name" placeholder="10.0.0.0/24 for example" class="validate-required" />
+            </div>
+            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
+              <span><b>Allowed inbound protocols:</b></span>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">SSH</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="design" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">HTTPS</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="dev" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ICMP</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="brand" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ALL</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="marketing" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
+              <span><b>Allowed outbound protocols:</b></span>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">SSH</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="design" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">HTTPS</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="dev" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ICMP</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="brand" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ALL</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="marketing" />
+                <label></label>
+              </div>
+            </div>
+          </form>
+          </div>
+          <div class="boxed boxed--border">
+          <form class="text-left form-email row" data-success="Thanks for your enquiry, we'll be in touch shortly." data-error="Please fill in all fields correctly.">
+            <div class="col-md-12 text-center boxed" style="margin-bottom:-4%; margin-top:-4%;">
+              <h5>NACL2</h5>
+            </div>
+            <div class="col-md-12">
+              <span><b>Source IP:</b></span>
+              <input type="text" name="name" placeholder="10.0.0.0/24 for example" class="validate-required" />
+            </div>
+            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
+              <span><b>Allowed inbound protocols:</b></span>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">SSH</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="design" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">HTTPS</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="dev" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ICMP</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="brand" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ALL</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="marketing" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
+              <span><b>Allowed outbound protocols:</b></span>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">SSH</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="design" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">HTTPS</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="dev" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ICMP</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="brand" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ALL</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="marketing" />
+                <label></label>
+              </div>
+            </div>
+          </form>
+          </div>
+          {% elif infrastructure_nacl == 3 %}
+          <div class="boxed boxed--border">
+          <form class="text-left form-email row" data-success="Thanks for your enquiry, we'll be in touch shortly." data-error="Please fill in all fields correctly.">
+            <div class="col-md-12 text-center boxed" style="margin-bottom:-4%; margin-top:-4%;">
+              <h5>NACL1</h5>
+            </div>
+            <div class="col-md-12">
+              <span><b>Source IP:</b></span>
+              <input type="text" name="name" placeholder="10.0.0.0/24 for example" class="validate-required" />
+            </div>
+            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
+              <span><b>Allowed inbound protocols:</b></span>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">SSH</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="design" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">HTTPS</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="dev" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ICMP</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="brand" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ALL</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="marketing" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
+              <span><b>Allowed outbound protocols:</b></span>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">SSH</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="design" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">HTTPS</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="dev" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ICMP</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="brand" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ALL</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="marketing" />
+                <label></label>
+              </div>
+            </div>
+          </form>
+          </div>
+          <div class="boxed boxed--border">
+          <form class="text-left form-email row" data-success="Thanks for your enquiry, we'll be in touch shortly." data-error="Please fill in all fields correctly.">
+            <div class="col-md-12 text-center boxed" style="margin-bottom:-4%; margin-top:-4%;">
+              <h5>NACL2</h5>
+            </div>
+            <div class="col-md-12">
+              <span><b>Source IP:</b></span>
+              <input type="text" name="name" placeholder="10.0.0.0/24 for example" class="validate-required" />
+            </div>
+            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
+              <span><b>Allowed inbound protocols:</b></span>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">SSH</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="design" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">HTTPS</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="dev" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ICMP</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="brand" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ALL</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="marketing" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
+              <span><b>Allowed outbound protocols:</b></span>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">SSH</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="design" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">HTTPS</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="dev" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ICMP</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="brand" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ALL</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="marketing" />
+                <label></label>
+              </div>
+            </div>
+          </form>
+          </div>
+          <div class="boxed boxed--border">
+          <form class="text-left form-email row" data-success="Thanks for your enquiry, we'll be in touch shortly." data-error="Please fill in all fields correctly.">
+            <div class="col-md-12 text-center boxed" style="margin-bottom:-4%; margin-top:-4%;">
+              <h5>3</h5>
+            </div>
+            <div class="col-md-12">
+              <span><b>Source IP:</b></span>
+              <input type="text" name="name" placeholder="10.0.0.0/24 for example" class="validate-required" />
+            </div>
+            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
+              <span><b>Allowed inbound protocols:</b></span>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">SSH</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="design" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">HTTPS</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="dev" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ICMP</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="brand" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ALL</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="marketing" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
+              <span><b>Allowed outbound protocols:</b></span>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">SSH</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="design" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">HTTPS</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="dev" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ICMP</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="brand" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ALL</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="marketing" />
+                <label></label>
+              </div>
+            </div>
+          </form>
+          </div>
+          {% elif infrastructure_nacl == 4 %}
+          <div class="boxed boxed--border">
+          <form class="text-left form-email row" data-success="Thanks for your enquiry, we'll be in touch shortly." data-error="Please fill in all fields correctly.">
+            <div class="col-md-12 text-center boxed" style="margin-bottom:-4%; margin-top:-4%;">
+              <h5>NACL1</h5>
+            </div>
+            <div class="col-md-12">
+              <span><b>Source IP:</b></span>
+              <input type="text" name="name" placeholder="10.0.0.0/24 for example" class="validate-required" />
+            </div>
+            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
+              <span><b>Allowed inbound protocols:</b></span>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">SSH</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="design" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">HTTPS</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="dev" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ICMP</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="brand" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ALL</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="marketing" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
+              <span><b>Allowed outbound protocols:</b></span>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">SSH</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="design" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">HTTPS</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="dev" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ICMP</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="brand" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ALL</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="marketing" />
+                <label></label>
+              </div>
+            </div>
+          </form>
+          </div>
+          <div class="boxed boxed--border">
+          <form class="text-left form-email row" data-success="Thanks for your enquiry, we'll be in touch shortly." data-error="Please fill in all fields correctly.">
+            <div class="col-md-12 text-center boxed" style="margin-bottom:-4%; margin-top:-4%;">
+              <h5>NACL2</h5>
+            </div>
+            <div class="col-md-12">
+              <span><b>Source IP:</b></span>
+              <input type="text" name="name" placeholder="10.0.0.0/24 for example" class="validate-required" />
+            </div>
+            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
+              <span><b>Allowed inbound protocols:</b></span>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">SSH</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="design" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">HTTPS</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="dev" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ICMP</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="brand" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ALL</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="marketing" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
+              <span><b>Allowed outbound protocols:</b></span>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">SSH</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="design" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">HTTPS</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="dev" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ICMP</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="brand" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ALL</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="marketing" />
+                <label></label>
+              </div>
+            </div>
+          </form>
+          </div>
+          <div class="boxed boxed--border">
+          <form class="text-left form-email row" data-success="Thanks for your enquiry, we'll be in touch shortly." data-error="Please fill in all fields correctly.">
+            <div class="col-md-12 text-center boxed" style="margin-bottom:-4%; margin-top:-4%;">
+              <h5>NACL3</h5>
+            </div>
+            <div class="col-md-12">
+              <span><b>Source IP:</b></span>
+              <input type="text" name="name" placeholder="10.0.0.0/24 for example" class="validate-required" />
+            </div>
+            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
+              <span><b>Allowed inbound protocols:</b></span>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">SSH</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="design" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">HTTPS</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="dev" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ICMP</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="brand" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ALL</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="marketing" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
+              <span><b>Allowed outbound protocols:</b></span>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">SSH</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="design" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">HTTPS</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="dev" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ICMP</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="brand" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ALL</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="marketing" />
+                <label></label>
+              </div>
+            </div>
+          </form>
+          </div>
+          <div class="boxed boxed--border">
+          <form class="text-left form-email row" data-success="Thanks for your enquiry, we'll be in touch shortly." data-error="Please fill in all fields correctly.">
+            <div class="col-md-12 text-center boxed" style="margin-bottom:-4%; margin-top:-4%;">
+              <h5>NACL4</h5>
+            </div>
+            <div class="col-md-12">
+              <span><b>Source IP:</b></span>
+              <input type="text" name="name" placeholder="10.0.0.0/24 for example" class="validate-required" />
+            </div>
+            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
+              <span><b>Allowed inbound protocols:</b></span>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">SSH</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="design" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">HTTPS</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="dev" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ICMP</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="brand" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ALL</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="marketing" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
+              <span><b>Allowed outbound protocols:</b></span>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">SSH</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="design" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">HTTPS</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="dev" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ICMP</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="brand" />
+                <label></label>
+              </div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+              <span class="block">ALL</span>
+              <div class="input-checkbox">
+                <input type="checkbox" name="marketing" />
+                <label></label>
+              </div>
+            </div>
+          </form>
+          </div>
+          {% endif %}
         <div class="row justify-content-center">
           <a class="btn btn--primary type--uppercase" style="margin-top:2%;" href="{% url 'cusInf_Basic' %}">
             <span class="btn__text">previous</span>

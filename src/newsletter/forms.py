@@ -1,5 +1,6 @@
+# from registration.forms import RegistrationForm
 from django import forms
-from .models import SignUp
+from .models import SignUp, DefaultStack, CustomStack
 
 class ContactForm(forms.Form):
     full_name = forms.CharField()
@@ -25,3 +26,20 @@ class SignUpForm(forms.ModelForm):
     #     full_name = self.cleaned_data.get('full_name')
     #     #validation code
     #     return full_name
+
+
+class createInfra(forms.ModelForm):
+    class Meta:
+        model = DefaultStack
+        fields = ['infrastructure_name']
+
+class customInfra(forms.ModelForm):
+    class Meta:
+        model = CustomStack
+        fields = ['infrastructure_name',
+                  'infrastructure_pubsub',
+                  'infrastructure_prvsub',
+                  'infrastructure_nacl',
+                  'infrastructure_sg',
+                  'infrastructure_pubinst',
+                  'infrastructure_prvinst']

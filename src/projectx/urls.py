@@ -4,6 +4,9 @@ from django.conf.urls.static import static
 from django.conf import settings
 from newsletter import views as newsletter_views
 from projectx import views as projectx_views
+# from newsletter.forms import ExRegistrationForm
+# from registration.backends.default.views import RegistrationView
+
 
 urlpatterns = [
     url(r'^$', newsletter_views.home, name='home'),
@@ -11,6 +14,9 @@ urlpatterns = [
     url(r'^about/$', projectx_views.about, name='about'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.default.urls')),
+    # url(r'accounts/register/$',
+    #     RegistrationView.as_view(form_class = ExRegistrationForm),
+    #     name = 'registration_register'),
     url(r'^createDefInfra1/', newsletter_views.createDefInfra1, name='createDefInfra1'),
     url(r'^createDefInfra2/', newsletter_views.createDefInfra2, name='createDefInfra2'),
     url(r'^createDefInfra3/', newsletter_views.createDefInfra3, name='createDefInfra3'),
