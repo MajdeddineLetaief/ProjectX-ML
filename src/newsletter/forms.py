@@ -1,6 +1,7 @@
 # from registration.forms import RegistrationForm
 from django import forms
-from .models import SignUp, DefaultStack, CustomStack
+from .models import SignUp, DefaultStack, CustomStack, Nacl, SG
+from django.forms.widgets import CheckboxSelectMultiple
 
 class ContactForm(forms.Form):
     full_name = forms.CharField()
@@ -43,3 +44,14 @@ class customInfra(forms.ModelForm):
                   'infrastructure_sg',
                   'infrastructure_pubinst',
                   'infrastructure_prvinst']
+
+
+class Nacl(forms.ModelForm):
+    class Meta:
+        model = Nacl
+        fields = ['nacl_name', 'nacl_src_ip','type']
+
+class SG(forms.ModelForm):
+    class Meta:
+        model = SG
+        fields = ['sg_name', 'sg_src_ip','type']

@@ -4,7 +4,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm, ContactForm
-from .models import DefaultStack
+from .models import DefaultStack, CustomStack
 from .import forms
 import boto3
 import json
@@ -56,21 +56,63 @@ def cusInf_Basic(request):
             instance = form.save(commit=False)
             instance.infrastructure_owner = request.user
             instance.save()
-            context = {
-               "infrastructure_nacl":instance.infrastructure_nacl,
-            }
-        return render(request, "cusInf_NACL.html", context)
+        return redirect('cusInf_NACL')
     else :
         form = forms.customInfra()
-        return render(request, "cusInf_Basic.html", {"form" : form})
+        context = {
+            "form":form,
+        }
+        return render(request, "cusInf_Basic.html", context)
 #########################################################
 @login_required
 def cusInf_NACL(request):
-    return render(request, "cusInf_NACL.html", {})
+    cs = CustomStack.objects.all()
+    number = cs.count()
+    nacl = cs[number-1].infrastructure_nacl
+    if request.method == 'POST':
+        form = forms.Nacl(request.POST)
+        form1 = forms.SG()
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.infrastructure_owner = request.user
+            instance.save()
+            context = {
+                "form1":form1,
+                "infrastructure_sg":instance.infrastructure_sg,
+            }
+        return render(request, "cusInf_SG.html", {})
+    else :
+        form = forms.Nacl()
+        context = {
+            "form":form,
+            "nacl":nacl,
+        }
+        return render(request, "cusInf_NACL.html", context)
 #########################################################
 @login_required
 def cusInf_SG(request):
-    return render(request, "cusInf_SG.html", {})
+    cs = CustomStack.objects.all()
+    number = cs.count()
+    sg = cs[number-1].infrastructure_sg
+    if request.method == 'POST':
+        form = forms.SG(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.infrastructure_owner = request.user
+            instance.save()
+            context = {
+                "form1":form1,
+                "infrastructure_pubinst":instance.infrastructure_pubinst,
+            }
+        return render(request, "cusInf_Instance.html", {})
+    else :
+        form = forms.SG()
+        context = {
+            "form":form,
+            "sg" : sg,
+        }
+        print sg
+        return render(request, "cusInf_SG.html", context)
 #########################################################
 @login_required
 def cusInf_Instance(request):

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #third party apps
     'registration',
+    'multiselectfield',
     #my apps
     'newsletter',
 
