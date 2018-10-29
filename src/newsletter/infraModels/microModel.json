@@ -21,7 +21,7 @@
             "Properties" : {
                 "VpcId" : { "Ref" : "VpcCF" },
                 "CidrBlock" : "10.0.1.0/24",
-                "AvailabilityZone" : "eu-central-1a",
+                "AvailabilityZone" : "eu-west-2a",
                 "Tags" : [
                     { "Key" : "Application", "Value" : { "Ref" : "AWS::StackName" } },
                     { "Key" : "Network", "Value" : "Public" },
@@ -35,7 +35,7 @@
             "Properties" : {
                 "VpcId" : { "Ref" : "VpcCF" },
                 "CidrBlock" : "10.0.2.0/24",
-                "AvailabilityZone" : "eu-central-1b",
+                "AvailabilityZone" : "eu-west-2b",
                 "Tags" : [
                     { "Key" : "Application", "Value" : { "Ref" : "AWS::StackName" } },
                     { "Key" : "Network", "Value" : "Public" },
@@ -49,7 +49,7 @@
             "Properties" : {
                 "VpcId" : { "Ref" : "VpcCF" },
                 "CidrBlock" : "10.0.3.0/24",
-                "AvailabilityZone" : "eu-central-1a",
+                "AvailabilityZone" : "eu-west-2a",
                 "Tags" : [
                     { "Key" : "Application", "Value" : { "Ref" : "AWS::StackName" } },
                     { "Key" : "Network", "Value" : "Public" },
@@ -63,7 +63,7 @@
             "Properties" : {
                 "VpcId" : { "Ref" : "VpcCF" },
                 "CidrBlock" : "10.0.4.0/24",
-                "AvailabilityZone" : "eu-central-1b",
+                "AvailabilityZone" : "eu-west-2b",
                 "Tags" : [
                     { "Key" : "Application", "Value" : { "Ref" : "AWS::StackName" } },
                     { "Key" : "Network", "Value" : "Public" },
@@ -266,13 +266,13 @@
             }
         },
 
-        "PublicEc2" : {
+        "PublicEc2n1" : {
             "Type" : "AWS::EC2::Instance",
             "DependsOn" : "GatewayToInternet",
             "Properties" : {
                 "InstanceType" : "t2.micro",
-                "ImageId" : "ami-1b316af0",
-                "KeyName" : "francfortpk",
+                "ImageId" : "ami-0708175939932fc75",
+                "KeyName" : "newkp",
                 "Tags" : [{"Key" : "Name", "Value" : "PubEc2CF"}],
                 "NetworkInterfaces" : [{
                     "AssociatePublicIpAddress" : "true",
@@ -284,19 +284,55 @@
             }
         },
 
-        "PrivateEc2" : {
+        "PublicEc2n2" : {
             "Type" : "AWS::EC2::Instance",
             "DependsOn" : "GatewayToInternet",
             "Properties" : {
                 "InstanceType" : "t2.micro",
-                "ImageId" : "ami-1b316af0",
-                "KeyName" : "francfortpk",
+                "ImageId" : "ami-0708175939932fc75",
+                "KeyName" : "newkp",
+                "Tags" : [{"Key" : "Name", "Value" : "PubEc2CF"}],
+                "NetworkInterfaces" : [{
+                    "AssociatePublicIpAddress" : "true",
+                    "DeviceIndex" : "0",
+                    "DeleteOnTermination" : "true",
+                    "SubnetId" : { "Ref" : "PubSub2CF" },
+                    "GroupSet": [{ "Ref" : "Ec2SecurityGroup" }]
+                }]
+            }
+        },
+
+        "PrivateEc2n1" : {
+            "Type" : "AWS::EC2::Instance",
+            "DependsOn" : "GatewayToInternet",
+            "Properties" : {
+                "InstanceType" : "t2.micro",
+                "ImageId" : "ami-0708175939932fc75",
+                "KeyName" : "newkp",
                 "Tags" : [{"Key" : "Name", "Value" : "PriEc2CF"}],
                 "NetworkInterfaces" : [{
                     "AssociatePublicIpAddress" : "false",
                     "DeviceIndex" : "0",
                     "DeleteOnTermination" : "true",
                     "SubnetId" : { "Ref" : "PriSub1CF" },
+                    "GroupSet": [{ "Ref" : "Ec2SecurityGroup" }]
+                }]
+            }
+        },
+
+        "PrivateEc2n2" : {
+            "Type" : "AWS::EC2::Instance",
+            "DependsOn" : "GatewayToInternet",
+            "Properties" : {
+                "InstanceType" : "t2.micro",
+                "ImageId" : "ami-0708175939932fc75",
+                "KeyName" : "newkp",
+                "Tags" : [{"Key" : "Name", "Value" : "PriEc2CF"}],
+                "NetworkInterfaces" : [{
+                    "AssociatePublicIpAddress" : "false",
+                    "DeviceIndex" : "0",
+                    "DeleteOnTermination" : "true",
+                    "SubnetId" : { "Ref" : "PriSub2CF" },
                     "GroupSet": [{ "Ref" : "Ec2SecurityGroup" }]
                 }]
             }

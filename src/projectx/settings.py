@@ -32,7 +32,6 @@ EMAIL_HOST_USER = 'majdeddine.letaief@gmail.com'
 EMAIL_HOST_PASSWORD = 'Ice&Fire16'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-
 # Application definition
 
 INSTALLED_APPS = [

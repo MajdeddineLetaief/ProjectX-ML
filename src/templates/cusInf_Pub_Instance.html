@@ -1,0 +1,102 @@
+{% extends "baseuser.html" %} {% load staticfiles %} {% block head_title %}Default Infrastructure | {% endblock %} {% block content %}
+<div class="container" style="min-height:857px;">
+  <hr>
+  <ol class="breadcrumbs" style="margin-bottom:0em;">
+    <li><a href="{% url 'user' %}">Main menu</a></li>
+    <li>Custom infrastructure</li>
+  </ol>
+  <div class="col-md-12">
+    <div class="row justify-content-center" style="margin-bottom:5%;">
+      <h2>Compose your <b>own</b> infrastructure !</h2>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-8">
+        <div class="row justify-content-center">
+          <h3>Public instances configuration</h5>
+        </div>
+        <div class="boxed boxed--border">
+          {% if inst == 1 %}
+          <form class="site-form" action=" {% url 'cusInf_Pub_Instance' %} " method="POST">
+            {%csrf_token%}
+              <div class="col-md-12 text-center boxed" style="margin-top:-4%; margin-bottom:-4%;">
+                <h5>Instance 1</h5>
+                <hr>
+              </div>
+              <div class="row">
+                <div class="col-md-5 text-center" style="margin-left:8%;" >
+                  <span><b>AMI type:</b></span>
+                  {{form.ami_type}}
+                </div>
+                <div class="col-md-5 text-center ">
+                  <span><b>Instance type:</b></span>
+                  {{form.instance_type}}
+                </div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-md-2 text-center">
+                <input type="submit" value="    Next">
+                </div>
+              </div>
+            </form>
+          {% elif inst == 2 %}
+          <form class="site-form" action=" {% url 'cusInf_Pub_Instance' %} " method="POST">
+            {%csrf_token%}
+              <div class="col-md-12 text-center boxed" style="margin-top:-4%; margin-bottom:-4%;">
+                <h5>Instance 1</h5>
+                <hr>
+              </div>
+              <div class="row">
+                <div class="col-md-5 text-center" style="margin-left:8%;" >
+                  <span><b>AMI type:</b></span>
+                  {{form.ami_type}}
+                </div>
+                <div class="col-md-5 text-center ">
+                  <span><b>Instance type:</b></span>
+                  {{form.instance_type}}
+                </div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-md-2 text-center">
+                <input type="submit" value="    Next">
+                </div>
+              </div>
+          </form>
+          <form class="site-form" action=" {% url 'cusInf_Pub_Instance' %} " method="POST">
+            {%csrf_token%}
+              <div class="col-md-12 text-center boxed" style="margin-top:-4%; margin-bottom:-4%;">
+                <h5>Instance 2</h5>
+                <hr>
+              </div>
+              <div class="row">
+                <div class="col-md-5 text-center" style="margin-left:8%;" >
+                  <span><b>AMI type:</b></span>
+                  {{form.ami_type}}
+                </div>
+                <div class="col-md-5 text-center ">
+                  <span><b>Instance type:</b></span>
+                  {{form.instance_type}}
+                </div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-md-2 text-center">
+                <input type="submit" value="    Next">
+                </div>
+              </div>
+            </form>
+          {% endif %}
+        </div>
+        <div class="row justify-content-center">
+          <a class="btn btn--primary type--uppercase" style="margin-top:2%;" href="{% url 'cusInf_SG' %}">
+            <span class="btn__text">previous</span>
+          </a>
+          <a class="btn btn--primary type--uppercase" style="margin-top:2%;" href="{% url 'cusInf_Prv_Instance' %}">
+            <span class="btn__text">next</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -21,56 +21,28 @@
             "Properties" : {
                 "VpcId" : { "Ref" : "VpcCF" },
                 "CidrBlock" : "10.0.1.0/24",
-                "AvailabilityZone" : "eu-central-1a",
+                "AvailabilityZone" : "eu-west-2a",
                 "Tags" : [
                     { "Key" : "Application", "Value" : { "Ref" : "AWS::StackName" } },
                     { "Key" : "Network", "Value" : "Public" },
                     { "Key" : "Name", "Value" : "PubSub1CF"}
                 ]
             }
-        },
-
-        "PubSub2CF" : {
-            "Type" : "AWS::EC2::Subnet",
-            "Properties" : {
-                "VpcId" : { "Ref" : "VpcCF" },
-                "CidrBlock" : "10.0.2.0/24",
-                "AvailabilityZone" : "eu-central-1b",
-                "Tags" : [
-                    { "Key" : "Application", "Value" : { "Ref" : "AWS::StackName" } },
-                    { "Key" : "Network", "Value" : "Public" },
-                    { "Key" : "Name", "Value" : "PubSub2CF"}
-                ]
-            }
-        },
+      },
 
         "PriSub1CF" : {
             "Type" : "AWS::EC2::Subnet",
             "Properties" : {
                 "VpcId" : { "Ref" : "VpcCF" },
                 "CidrBlock" : "10.0.3.0/24",
-                "AvailabilityZone" : "eu-central-1a",
+                "AvailabilityZone" : "eu-west-2a",
                 "Tags" : [
                     { "Key" : "Application", "Value" : { "Ref" : "AWS::StackName" } },
                     { "Key" : "Network", "Value" : "Public" },
                     { "Key" : "Name", "Value" : "PriSub1CF"}
                 ]
             }
-        },
-
-        "PriSub2CF" : {
-            "Type" : "AWS::EC2::Subnet",
-            "Properties" : {
-                "VpcId" : { "Ref" : "VpcCF" },
-                "CidrBlock" : "10.0.4.0/24",
-                "AvailabilityZone" : "eu-central-1b",
-                "Tags" : [
-                    { "Key" : "Application", "Value" : { "Ref" : "AWS::StackName" } },
-                    { "Key" : "Network", "Value" : "Public" },
-                    { "Key" : "Name", "Value" : "PriSub2CF"}
-                ]
-            }
-        },
+      },
 
         "InternetGateway" : {
             "Type" : "AWS::EC2::InternetGateway",
@@ -111,15 +83,7 @@
                 "SubnetId" : { "Ref" : "PubSub1CF" },
                 "RouteTableId" : { "Ref" : "PublicRouteTable" }
             }
-        },
-
-        "PublicSubnetRouteTableAssociation2" : {
-            "Type" : "AWS::EC2::SubnetRouteTableAssociation",
-            "Properties" : {
-                "SubnetId" : { "Ref" : "PubSub2CF" },
-                "RouteTableId" : { "Ref" : "PublicRouteTable" }
-            }
-        },
+      },
 
         "PrivateRouteTable" : {
             "Type" : "AWS::EC2::RouteTable",
@@ -135,15 +99,7 @@
                 "SubnetId" : { "Ref" : "PriSub1CF" },
                 "RouteTableId" : { "Ref" : "PrivateRouteTable" }
             }
-        },
-
-        "PrivateSubnetRouteTableAssociation2" : {
-            "Type" : "AWS::EC2::SubnetRouteTableAssociation",
-            "Properties" : {
-                "SubnetId" : { "Ref" : "PriSub2CF" },
-                "RouteTableId" : { "Ref" : "PrivateRouteTable" }
-            }
-        },
+      },
 
         "PublicNACL" : {
             "Type" : "AWS::EC2::NetworkAcl",
@@ -185,15 +141,7 @@
                 "SubnetId" : { "Ref" : "PubSub1CF" },
                 "NetworkAclId" : { "Ref" : "PublicNACL" }
             }
-        },
-
-        "PublicSubnetNetworkAclAssociation2" : {
-            "Type" : "AWS::EC2::SubnetNetworkAclAssociation",
-            "Properties" : {
-                "SubnetId" : { "Ref" : "PubSub2CF" },
-                "NetworkAclId" : { "Ref" : "PublicNACL" }
-            }
-        },
+      },
 
         "PrivateNACL" : {
             "Type" : "AWS::EC2::NetworkAcl",
@@ -235,15 +183,7 @@
                 "SubnetId" : { "Ref" : "PriSub1CF" },
                 "NetworkAclId" : { "Ref" : "PrivateNACL" }
             }
-        },
-
-        "PrivateSubnetNetworkAclAssociation2" : {
-            "Type" : "AWS::EC2::SubnetNetworkAclAssociation",
-            "Properties" : {
-                "SubnetId" : { "Ref" : "PriSub2CF" },
-                "NetworkAclId" : { "Ref" : "PrivateNACL" }
-            }
-        },
+      },
 
         "Ec2SecurityGroup" : {
             "Type" : "AWS::EC2::SecurityGroup",
@@ -271,8 +211,8 @@
             "DependsOn" : "GatewayToInternet",
             "Properties" : {
                 "InstanceType" : "t2.micro",
-                "ImageId" : "ami-1b316af0",
-                "KeyName" : "francfortpk",
+                "ImageId" : "ami-0708175939932fc75",
+                "KeyName" : "newkp",
                 "Tags" : [{"Key" : "Name", "Value" : "PubEc2CF"}],
                 "NetworkInterfaces" : [{
                     "AssociatePublicIpAddress" : "true",
@@ -289,8 +229,8 @@
             "DependsOn" : "GatewayToInternet",
             "Properties" : {
                 "InstanceType" : "t2.micro",
-                "ImageId" : "ami-1b316af0",
-                "KeyName" : "francfortpk",
+                "ImageId" : "ami-0708175939932fc75",
+                "KeyName" : "newkp",
                 "Tags" : [{"Key" : "Name", "Value" : "PriEc2CF"}],
                 "NetworkInterfaces" : [{
                     "AssociatePublicIpAddress" : "false",

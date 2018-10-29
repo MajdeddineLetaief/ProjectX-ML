@@ -27,7 +27,8 @@ urlpatterns = [
     url(r'^cusInf_Basic/', newsletter_views.cusInf_Basic, name='cusInf_Basic'),
     url(r'^cusInf_NACL/', newsletter_views.cusInf_NACL, name='cusInf_NACL'),
     url(r'^cusInf_SG/', newsletter_views.cusInf_SG, name='cusInf_SG'),
-    url(r'^cusInf_Instance/', newsletter_views.cusInf_Instance, name='cusInf_Instance'),
+    url(r'^cusInf_Pub_Instance/', newsletter_views.cusInf_Pub_Instance, name='cusInf_Pub_Instance'),
+    url(r'^cusInf_Prv_Instance/', newsletter_views.cusInf_Prv_Instance, name='cusInf_Prv_Instance'),
 
 
 

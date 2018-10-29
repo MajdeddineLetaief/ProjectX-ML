@@ -6,9 +6,11 @@ from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm, ContactForm
 from .models import DefaultStack, CustomStack
 from .import forms
+import os
 import boto3
 import json
 #########################################################
+
 def home(request):
     title = 'Welcome'
     form = SignUpForm(request.POST or None)
@@ -70,19 +72,14 @@ def cusInf_NACL(request):
     number = cs.count()
     nacl = cs[number-1].infrastructure_nacl
     if request.method == 'POST':
-        form = forms.Nacl(request.POST)
-        form1 = forms.SG()
+        form = forms.nacl(request.POST)
         if form.is_valid():
             instance = form.save(commit=False)
-            instance.infrastructure_owner = request.user
+            instance.nacl_name = str(request.user) + "NACL1"
             instance.save()
-            context = {
-                "form1":form1,
-                "infrastructure_sg":instance.infrastructure_sg,
-            }
-        return render(request, "cusInf_SG.html", {})
+        return redirect('cusInf_SG')
     else :
-        form = forms.Nacl()
+        form = forms.nacl()
         context = {
             "form":form,
             "nacl":nacl,
@@ -95,28 +92,58 @@ def cusInf_SG(request):
     number = cs.count()
     sg = cs[number-1].infrastructure_sg
     if request.method == 'POST':
-        form = forms.SG(request.POST)
+        form = forms.sg(request.POST)
         if form.is_valid():
             instance = form.save(commit=False)
-            instance.infrastructure_owner = request.user
+            instance.sg_name = str(request.user) + "SG1"
             instance.save()
-            context = {
-                "form1":form1,
-                "infrastructure_pubinst":instance.infrastructure_pubinst,
-            }
-        return render(request, "cusInf_Instance.html", {})
+        return redirect('cusInf_Pub_Instance')
     else :
-        form = forms.SG()
+        form = forms.sg()
         context = {
             "form":form,
             "sg" : sg,
         }
-        print sg
         return render(request, "cusInf_SG.html", context)
 #########################################################
 @login_required
-def cusInf_Instance(request):
-    return render(request, "cusInf_Instance.html", {})
+def cusInf_Pub_Instance(request):
+    cs = CustomStack.objects.all()
+    number = cs.count()
+    inst = cs[number-1].infrastructure_pubinst
+    if request.method == 'POST':
+        form = forms.instance(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.save()
+        return redirect('cusInf_Prv_Instance')
+    else :
+        form = forms.instance()
+        context = {
+            "form":form,
+            "inst" : inst,
+        }
+    return render(request, "cusInf_Pub_Instance.html", context)
+
+#########################################################
+@login_required
+def cusInf_Prv_Instance(request):
+    cs = CustomStack.objects.all()
+    number = cs.count()
+    inst = cs[number-1].infrastructure_prvinst
+    if request.method == 'POST':
+        form = forms.instance(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.save()
+        return redirect('cusInf_Prv_Instance')
+    else :
+        form = forms.instance()
+        context = {
+            "form":form,
+            "inst" : inst,
+        }
+    return render(request, "cusInf_Prv_Instance.html", context)
 #########################################################
 @login_required
 def createInfra(request):
@@ -128,8 +155,13 @@ def defInf(request):
     title = 'Default Infrastructure'
     client = boto3.client('cloudformation')
     client1 = boto3.client('ec2')
+    client3 = boto3.client('autoscaling',region_name='eu-west-2')
     response = client.describe_stacks()
     global ip_add1, ip_add2
+    ip_add1 = ''
+    ip_add2 = ''
+    ip_add3 = ''
+    ip_add4 = ''
     if request.method == 'POST':
          form = forms.createInfra(request.POST)
          if form.is_valid() :
@@ -176,9 +208,12 @@ def defInf(request):
                 return render(request, "defInf.html", context)
             else :
                 context = {
-                    "response" : value,
+                    "val" : value,
+                    "val1" : value1,
+                    "val2" : value3,
                     "form" : form,
                 }
+                print value
                 return render(request, "defInf.html", context)
         if value1 == str(request.user) and value3 == 'micro':
             response1= client.describe_stack_resources(
@@ -186,29 +221,45 @@ def defInf(request):
             )
             if value == 'CREATE_COMPLETE':
                 for each in response1['StackResources']:
-                    if each['LogicalResourceId'] == 'PublicEc2':
+                    if each['LogicalResourceId'] == 'PublicEc2n1':
                         inst_id = each['PhysicalResourceId']
                         response2 = client1.describe_instances(Filters=[{'Name': 'instance-id','Values': [inst_id,]},],)
                         for each in response2['Reservations']:
                             ip_add1 = each['Instances'][0]['PublicIpAddress']
                 for each in response1['StackResources']:
-                    if each['LogicalResourceId'] == 'PrivateEc2':
+                    if each['LogicalResourceId'] == 'PublicEc2n2':
                         inst_id = each['PhysicalResourceId']
                         response2 = client1.describe_instances(Filters=[{'Name': 'instance-id','Values': [inst_id,]},],)
                         for each in response2['Reservations']:
-                            ip_add2= each['Instances'][0]['PrivateIpAddress']
+                            ip_add2 = each['Instances'][0]['PublicIpAddress']
+                for each in response1['StackResources']:
+                    if each['LogicalResourceId'] == 'PrivateEc2n1':
+                        inst_id = each['PhysicalResourceId']
+                        response2 = client1.describe_instances(Filters=[{'Name': 'instance-id','Values': [inst_id,]},],)
+                        for each in response2['Reservations']:
+                            ip_add3= each['Instances'][0]['PrivateIpAddress']
+                for each in response1['StackResources']:
+                    if each['LogicalResourceId'] == 'PrivateEc2n2':
+                        inst_id = each['PhysicalResourceId']
+                        response2 = client1.describe_instances(Filters=[{'Name': 'instance-id','Values': [inst_id,]},],)
+                        for each in response2['Reservations']:
+                            ip_add4= each['Instances'][0]['PrivateIpAddress']
                 context = {
                     "val" : value,
                     "val1" : value1,
                     "val2" : value3,
                     "ip1" : ip_add1,
                     "ip2" : ip_add2,
+                    "ip3" : ip_add3,
+                    "ip4" : ip_add4,
                     "form" : form,
                 }
                 return render(request, "defInf.html", context)
             else :
                 context = {
-                    "response" : value,
+                    "val" : value,
+                    "val1" : value1,
+                    "val2" : value3,
                     "form" : form,
                 }
                 return render(request, "defInf.html", context)
@@ -217,18 +268,24 @@ def defInf(request):
                 StackName = value2
             )
             if value == 'CREATE_COMPLETE':
-                for each in response1['StackResources']:
-                    if each['LogicalResourceId'] == 'PublicEc2':
-                        inst_id = each['PhysicalResourceId']
-                        response2 = client1.describe_instances(Filters=[{'Name': 'instance-id','Values': [inst_id,]},],)
-                        for each in response2['Reservations']:
-                            ip_add1 = each['Instances'][0]['PublicIpAddress']
-                for each in response1['StackResources']:
-                    if each['LogicalResourceId'] == 'PrivateEc2':
-                        inst_id = each['PhysicalResourceId']
-                        response2 = client1.describe_instances(Filters=[{'Name': 'instance-id','Values': [inst_id,]},],)
-                        for each in response2['Reservations']:
-                            ip_add2= each['Instances'][0]['PrivateIpAddress']
+                response2 = client1.describe_instances()
+                for each in response2['Reservations']:
+                    id = each['Instances'][0]['ImageId']
+                    inst = each['Instances']
+                    if id == 'ami-0708175939932fc75':
+                        net = inst[0]['NetworkInterfaces']
+                        for each in net:
+                            prv = each['PrivateIpAddresses']
+                            for each in prv:
+                                asso = each['Association']
+                                ip_add1= asso['PublicIp']
+
+                    if id == 'ami-00ee3b59e07408c27':
+                        net = inst[0]['NetworkInterfaces']
+                        for each in net:
+                            prv = each['PrivateIpAddresses']
+                            ip_add2 = prv[0]['PrivateIpAddress']
+
                 context = {
                     "val" : value,
                     "val1" : value1,
@@ -240,7 +297,11 @@ def defInf(request):
                 return render(request, "defInf.html", context)
             else :
                 context = {
-                    "response" : value,
+                    "val" : value,
+                    "val1" : value1,
+                    "val2" : value3,
+                    "ip1" : ip_add1,
+                    "ip2" : ip_add2,
                     "form" : form,
                 }
                 return render(request, "defInf.html", context)
@@ -249,30 +310,58 @@ def defInf(request):
                 StackName = value2
             )
             if value == 'CREATE_COMPLETE':
-                for each in response1['StackResources']:
-                    if each['LogicalResourceId'] == 'PublicEc2':
-                        inst_id = each['PhysicalResourceId']
-                        response2 = client1.describe_instances(Filters=[{'Name': 'instance-id','Values': [inst_id,]},],)
-                        for each in response2['Reservations']:
-                            ip_add1 = each['Instances'][0]['PublicIpAddress']
-                for each in response1['StackResources']:
-                    if each['LogicalResourceId'] == 'PrivateEc2':
-                        inst_id = each['PhysicalResourceId']
-                        response2 = client1.describe_instances(Filters=[{'Name': 'instance-id','Values': [inst_id,]},],)
-                        for each in response2['Reservations']:
-                            ip_add2= each['Instances'][0]['PrivateIpAddress']
+                response2 = client1.describe_instances()
+                for each in response2['Reservations']:
+                    id = each['Instances'][0]['ImageId']
+                    inst = each['Instances']
+                    if id == 'ami-0708175939932fc75':
+                        net = inst[0]['NetworkInterfaces']
+                        for each in net:
+                            prv = each['PrivateIpAddresses']
+                            for each in prv:
+                                asso = each['Association']
+                                ip_add1= asso['PublicIp']
+
+                    if id == 'ami-058f46b781900723c':
+                        net = inst[0]['NetworkInterfaces']
+                        for each in net:
+                            prv = each['PrivateIpAddresses']
+                            for each in prv:
+                                asso = each['Association']
+                                ip_add2= asso['PublicIp']
+
+                    if id == 'ami-00ee3b59e07408c27':
+                        net = inst[0]['NetworkInterfaces']
+                        for each in net:
+                            prv = each['PrivateIpAddresses']
+                            ip_add3 = prv[0]['PrivateIpAddress']
+
+                    if id == 'ami-049bd848e8c4021ad':
+                        net = inst[0]['NetworkInterfaces']
+                        for each in net:
+                            prv = each['PrivateIpAddresses']
+                            ip_add4 = prv[0]['PrivateIpAddress']
+
                 context = {
                     "val" : value,
                     "val1" : value1,
                     "val2" : value3,
                     "ip1" : ip_add1,
                     "ip2" : ip_add2,
+                    "ip3" : ip_add3,
+                    "ip4" : ip_add4,
                     "form" : form,
                 }
                 return render(request, "defInf.html", context)
             else :
                 context = {
-                    "response" : value,
+                    "val" : value,
+                    "val1" : value1,
+                    "val2" : value3,
+                    "ip1" : ip_add1,
+                    "ip2" : ip_add2,
+                    "ip3" : ip_add3,
+                    "ip4" : ip_add4,
                     "form" : form,
                 }
                 return render(request, "defInf.html", context)
@@ -281,131 +370,7 @@ def defInf(request):
                 "form" : form,
             }
             return render(request, "defInf.html", context)
-        # # # value1 = each['StackName']
-        # # if value1 == 'tinyModel':
-        # #     response1= client.describe_stack_resources(
-        # #         StackName = 'tinyModel'
-        # #     )
-        # #     if value == 'CREATE_COMPLETE' and value1 == 'tinyModel' :
-        # #         for each in response1['StackResources']:
-        # #             if each['LogicalResourceId'] == 'PublicEc2':
-        # #                 inst_id = each['PhysicalResourceId']
-        # #                 response2 = client1.describe_instances(Filters=[{'Name': 'instance-id','Values': [inst_id,]},],)
-        # #                 for each in response2['Reservations']:
-        # #                     ip_add1 = each['Instances'][0]['PublicIpAddress']
-        # #         for each in response1['StackResources']:
-        # #             if each['LogicalResourceId'] == 'PrivateEc2':
-        # #                 inst_id = each['PhysicalResourceId']
-        # #                 response2 = client1.describe_instances(Filters=[{'Name': 'instance-id','Values': [inst_id,]},],)
-        # #                 for each in response2['Reservations']:
-        # #                     ip_add2= each['Instances'][0]['PublicIpAddress']
-        # #         context = {
-        # #             "val" : value,
-        # #             "val1" : value1,
-        # #             "ip1" : ip_add1,
-        # #             "ip2" : ip_add2,
-        # #
-        # #         }
-        # #
-        # #         print val
-        # #         return render(request, "defInf.html", context)
-        # #     else :
-        # #         context = {
-        # #             "response" : value,
-        # #         }
-        # #         return render(request, "defInf.html", context)
-        # elif value1 == 'microModel':
-        #     response1= client.describe_stack_resources(
-        #         StackName = 'microModel'
-        #     )
-        #     if value == 'CREATE_COMPLETE' and value1 == 'microModel' :
-        #         for each in response1['StackResources']:
-        #             if each['LogicalResourceId'] == 'PublicEc2':
-        #                 inst_id = each['PhysicalResourceId']
-        #                 response2 = client1.describe_instances(Filters=[{'Name': 'instance-id','Values': [inst_id,]},],)
-        #                 for each in response2['Reservations']:
-        #                     ip_add1 = each['Instances'][0]['PublicIpAddress']
-        #         for each in response1['StackResources']:
-        #             if each['LogicalResourceId'] == 'PrivateEc2':
-        #                 inst_id = each['PhysicalResourceId']
-        #                 response2 = client1.describe_instances(Filters=[{'Name': 'instance-id','Values': [inst_id,]},],)
-        #                 for each in response2['Reservations']:
-        #                     ip_add2= each['Instances'][0]['PublicIpAddress']
-        #         context = {
-        #             "response" : value,
-        #             "response1" : value1,
-        #             "ip1" : ip_add1,
-        #             "ip2" : ip_add2
-        #         }
-        #         return render(request, "defInf.html", context)
-        #     else :
-        #         context = {
-        #             "response" : value,
-        #         }
-        #         return render(request, "defInf.html", context)
-        # elif value1 == 'mediumModel':
-        #     response1= client.describe_stack_resources(
-        #         StackName = 'mediumModel'
-        #     )
-        #     if value == 'CREATE_COMPLETE' and value1 == 'mediumModel' :
-        #         for each in response1['StackResources']:
-        #             if each['LogicalResourceId'] == 'PublicEc2':
-        #                 inst_id = each['PhysicalResourceId']
-        #                 response2 = client1.describe_instances(Filters=[{'Name': 'instance-id','Values': [inst_id,]},],)
-        #                 for each in response2['Reservations']:
-        #                     ip_add1 = each['Instances'][0]['PublicIpAddress']
-        #         for each in response1['StackResources']:
-        #             if each['LogicalResourceId'] == 'PrivateEc2':
-        #                 inst_id = each['PhysicalResourceId']
-        #                 response2 = client1.describe_instances(Filters=[{'Name': 'instance-id','Values': [inst_id,]},],)
-        #                 for each in response2['Reservations']:
-        #                     ip_add2= each['Instances'][0]['PublicIpAddress']
-        #         context = {
-        #             "response" : value,
-        #             "response1" : value1,
-        #             "ip1" : ip_add1,
-        #             "ip2" : ip_add2
-        #         }
-        #         return render(request, "defInf.html", context)
-        #     else :
-        #         context = {
-        #             "response" : value,
-        #         }
-        #         return render(request, "defInf.html", context)
-        # elif value1 == 'largeModel':
-        #     response1= client.describe_stack_resources(
-        #         StackName = 'largeModel'
-        #     )
-        #     if value == 'CREATE_COMPLETE' and value1 == 'largeModel' :
-        #         for each in response1['StackResources']:
-        #             if each['LogicalResourceId'] == 'PublicEc2':
-        #                 inst_id = each['PhysicalResourceId']
-        #                 response2 = client1.describe_instances(Filters=[{'Name': 'instance-id','Values': [inst_id,]},],)
-        #                 for each in response2['Reservations']:
-        #                     ip_add1 = each['Instances'][0]['PublicIpAddress']
-        #         for each in response1['StackResources']:
-        #             if each['LogicalResourceId'] == 'PrivateEc2':
-        #                 inst_id = each['PhysicalResourceId']
-        #                 response2 = client1.describe_instances(Filters=[{'Name': 'instance-id','Values': [inst_id,]},],)
-        #                 for each in response2['Reservations']:
-        #                     ip_add2= each['Instances'][0]['PublicIpAddress']
-        #         context = {
-        #             "response" : value,
-        #             "response1" : value1,
-        #             "ip1" : ip_add1,
-        #             "ip2" : ip_add2
-        #         }
-        #         return render(request, "defInf.html", context)
-        #     else :
-        #         context = {
-        #             "response" : value,
-        #         }
-        #         print value1
-        #         print value
-        #         return render(request, "defInf.html", context)
-        # else :
-        #     # print value1
-        #     # print value
+
     return render(request, "defInf.html", {"form" : form})
 #########################################################
 @login_required
@@ -487,31 +452,35 @@ def createDefInfra4(request):
 @login_required
 def deleteInfra1(request):
     client = boto3.client('cloudformation')
-    response = client.delete_stack(
-        StackName='tinyModel',
-    )
+    response1 = client.describe_stacks()
+    for each in response1['Stacks']:
+        value = each['StackName']
+        response = client.delete_stack(StackName= value,)
     return render(request, "user.html", {})
 #########################################################
 @login_required
 def deleteInfra2(request):
     client = boto3.client('cloudformation')
-    response = client.delete_stack(
-        StackName='microModel',
-    )
+    response1 = client.describe_stacks()
+    for each in response1['Stacks']:
+        value = each['StackName']
+        response = client.delete_stack(StackName= value,)
     return render(request, "user.html", {})
 #########################################################
 @login_required
 def deleteInfra3(request):
     client = boto3.client('cloudformation')
-    response = client.delete_stack(
-        StackName='mediumModel',
-    )
+    response1 = client.describe_stacks()
+    for each in response1['Stacks']:
+        value = each['StackName']
+        response = client.delete_stack(StackName= value,)
     return render(request, "user.html", {})
 #########################################################
 @login_required
 def deleteInfra4(request):
     client = boto3.client('cloudformation')
-    response = client.delete_stack(
-        StackName='largeModel',
-    )
+    response1 = client.describe_stacks()
+    for each in response1['Stacks']:
+        value = each['StackName']
+        response = client.delete_stack(StackName= value,)
     return render(request, "user.html", {})

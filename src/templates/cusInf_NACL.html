@@ -1,16 +1,15 @@
 {% extends "baseuser.html" %} {% load staticfiles %} {% load l10n %}
  {% block head_title %}Default Infrastructure | {% endblock %} {% block content %}
-<div class="container">
+<div class="container" style="min-height:857px;">
   <hr>
   <ol class="breadcrumbs" style="margin-bottom:0em;">
     <li><a href="{% url 'user' %}">Main menu</a></li>
     <li>Custom infrastructure</li>
   </ol>
   <div class="col-md-12">
-    <div class="row justify-content-center">
-      <h2>Compose your <b>own</b> infrastructure !</h2>{{nacl}}
+    <div class="row justify-content-center" style="margin-bottom:5%;">
+      <h2>Compose your <b>own</b> infrastructure !</h2>
     </div>
-  </div>
   </div>
   <div class="col-md-12">
     <div class="row justify-content-center">
@@ -18,75 +17,94 @@
         <div class="row justify-content-center">
           <h3>NACLs configuration</h5>
         </div>
-          {% if nacl == 1 %}
-          <div class="boxed boxed--border">
+        {% if nacl == 1 %}
+        <div class="boxed boxed--border">
             <form class="site-form" action=" {% url 'cusInf_NACL' %} " method="POST">
               {%csrf_token%}
-              <div class="col-md-12 text-center boxed" style="margin-bottom:-4%; margin-top:-4%;">
-                <h5>NACL1</h5>
-              </div>
-              <div class="col-md-12">
-                <span><b>Source IP:</b></span>
-                <input type="text" name="name" placeholder="10.0.0.0/24 for example" class="validate-required" />
-              </div>
-              <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-                <span><b>Allowed inbound protocols:</b></span>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <div class="input-checkbox">
-                  <input type="checkbox" name="design" />
-                  {{form.type.0}}
+                <div class="col-md-12 text-center boxed" style="margin-bottom:-2%; margin-top:-4%;">
+                  <h5>NACL1</h5>
+                  <hr>
                 </div>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <div class="input-checkbox">
-                  <input type="checkbox" name="design" />
-                  {{form.type.1}}
+                <div class="row justify-content-center">
+                  <div class="col-md-4 col-6 text-center">
+                    <span><b>Source IP:</b></span>
+                    {{form.nacl_src_ip}}
+                  </div>
                 </div>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <div class="input-checkbox">
-                  <input type="checkbox" name="brand" />
-                  {{form.type.2}}
+                </br>
+                <div class="row">
+                  <div class="col-md-4 text-center" style="margin-left:17%;" >
+                    <span><b>Allowed inbound protocols:</b></span>
+                    {{form.nacl_in_prot}}
+                  </div>
+                  <div class="col-md-4 text-center ">
+                    <span><b>Allowed outbound protocols:</b></span>
+                    {{form.nacl_out_prot}}
+                  </div>
                 </div>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <div class="input-checkbox">
-                  <input type="checkbox" name="marketing" />
-                  {{form.type.3}}
+                <div class="row justify-content-center">
+                  <div class="col-md-2 text-center">
+                  <input type="submit" value="    Next">
+                  </div>
                 </div>
-              </div>
-              <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-                <span><b>Allowed outbound protocols:</b></span>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <div class="input-checkbox">
-                  <input type="checkbox" name="design" />
-                  {{form.type.0}}
-                </div>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <div class="input-checkbox">
-                  <input type="checkbox" name="dev" />
-                  {{form.type.1}}
-                </div>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <div class="input-checkbox">
-                  <input type="checkbox" name="brand" />
-                  {{form.type.2}}
-                </div>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <div class="input-checkbox">
-                  <input type="checkbox" name="marketing" />
-                  {{form.type.3}}
-                </div>
-              </div>
             </form>
           </div>
-          {% elif nacl == 2 %}
-          <div class="boxed boxed--border">
+        {% elif nacl == 2 %}
+        <div class="boxed boxed--border">
+            <form class="site-form" action=" {% url 'cusInf_NACL' %} " method="POST">
+              {%csrf_token%}
+                <div class="col-md-12 text-center boxed" style="margin-bottom:-2%; margin-top:-4%;">
+                  <h5>NACL1</h5>
+                  <hr>
+                </div>
+                <div class="row justify-content-center">
+                  <div class="col-md-4 col-6 text-center">
+                    <span><b>Source IP:</b></span>
+                    {{form.nacl_src_ip}}
+                  </div>
+                </div>
+                </br>
+                <div class="row">
+                  <div class="col-md-4 text-center" style="margin-left:17%;" >
+                    <span><b>Allowed inbound protocols:</b></span>
+                    {{form.nacl_in_prot}}
+                  </div>
+                  <div class="col-md-4 text-center ">
+                    <span><b>Allowed outbound protocols:</b></span>
+                    {{form.nacl_out_prot}}
+                  </div>
+                </div>
+                {%csrf_token%}
+                  <div class="col-md-12 text-center boxed" style="margin-bottom:-2%;">
+                    <h5>NACL2</h5>
+                    <hr>
+                  </div>
+                  <div class="row justify-content-center">
+                    <div class="col-md-4 col-6 text-center">
+                      <span><b>Source IP:</b></span>
+                      {{form.nacl_src_ip}}
+                    </div>
+                  </div>
+                  </br>
+                  <div class="row">
+                    <div class="col-md-4 text-center" style="margin-left:17%;" >
+                      <span><b>Allowed inbound protocols:</b></span>
+                      {{form.nacl_in_prot}}
+                    </div>
+                    <div class="col-md-4 text-center ">
+                      <span><b>Allowed outbound protocols:</b></span>
+                      {{form.nacl_out_prot}}
+                    </div>
+                  </div>
+                  <div class="row justify-content-center">
+                    <div class="col-md-2 text-center">
+                    <input type="submit" value="    Next">
+                    </div>
+                  </div>
+              </form>
+          </div>
+        {% elif nacl == 3 %}
+        <div class="boxed boxed--border">
             <form class="site-form" action=" {% url 'cusInf_NACL' %} " method="POST">
               {%csrf_token%}
               <div class="col-md-12 text-center boxed" style="margin-bottom:-4%; margin-top:-4%;">
@@ -96,39 +114,8 @@
                 <span><b>Source IP:</b></span>
                 <input type="text" name="name" placeholder="10.0.0.0/24 for example" class="validate-required" />
               </div>
-              <div class="col-md-12 text-center boxed" style="margin-top:2%; margin-bottom:4%;">
-                <span><b>Allowed inbound protocols:</b></span>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <span class="block">SSH</span>
-                <div class="input-checkbox">
-                  <input type="checkbox" />
-                  {{form1.type.0}}
-                </div>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <span class="block">HTTPS</span>
-                <div class="input-checkbox">
-                  <input type="checkbox" />
-                  {{form1.type.1}}
-                </div>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <span class="block">ICMP</span>
-                <div class="input-checkbox">
-                  <input type="checkbox" name="brand" />
-                  {{form1.type.2}}
-                </div>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <span class="block">ALL</span>
-                <div class="input-checkbox">
-                  <input type="checkbox" name="marketing" />
-                  {{form1.type.3}}
-                </div>
-              </div>
               <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-                <span><b>Allowed outbound protocols:</b></span>
+                <span><b>Allowed inbound protocols:</b></span>
               </div>
               <div class="col-md-3 col-6 text-center">
                 <span class="block">SSH</span>
@@ -158,9 +145,40 @@
                   {{form1.type.3}}
                 </div>
               </div>
+              <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
+                <span><b>Allowed outbound protocols:</b></span>
+              </div>
+              <div class="col-md-3 col-6 text-center">
+                <span class="block">SSH</span>
+                <div class="input-checkbox">
+                  <input type="checkbox" name="design" />
+                  {{form1.type.0}}
+                </div>
+              </div>
+              <div class="col-md-3 col-6 text-center">
+                <span class="block">HTTPS</span>
+                <div class="input-checkbox">
+                  <input type="checkbox" name="dev" />
+                  {{form1.type.1}}
+                </div>
+              </div>
+              <div class="col-md-3 col-6 text-center">
+                <span class="block">ICMP</span>
+                <div class="input-checkbox">
+                  <input type="checkbox" name="brand" />
+                  {{form1.type.2}}
+                </div>
+              </div>
+              <div class="col-md-3 col-6 text-center">
+                <span class="block">ALL</span>
+                <div class="input-checkbox">
+                  <input type="checkbox" name="marketing" />
+                  {{form1.type.3}}
+                </div>
+              </div>
             </form>
           </div>
-          <div class="boxed boxed--border">
+        <div class="boxed boxed--border">
             <form class="site-form" action=" {% url 'cusInf_NACL' %} " method="POST">
               {%csrf_token%}
               <div class="col-md-12 text-center boxed" style="margin-bottom:-4%; margin-top:-4%;">
@@ -234,156 +252,7 @@
               </div>
             </form>
           </div>
-          {% elif nacl == 3 %}
-          <div class="boxed boxed--border">
-            <form class="site-form" action=" {% url 'cusInf_NACL' %} " method="POST">
-              {%csrf_token%}
-              <div class="col-md-12 text-center boxed" style="margin-bottom:-4%; margin-top:-4%;">
-                <h5>NACL1</h5>
-              </div>
-              <div class="col-md-12">
-                <span><b>Source IP:</b></span>
-                <input type="text" name="name" placeholder="10.0.0.0/24 for example" class="validate-required" />
-              </div>
-              <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-                <span><b>Allowed inbound protocols:</b></span>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <span class="block">SSH</span>
-                <div class="input-checkbox">
-                  <input type="checkbox" name="design" />
-                  {{form1.type.0}}
-                </div>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <span class="block">HTTPS</span>
-                <div class="input-checkbox">
-                  <input type="checkbox" name="dev" />
-                  {{form1.type.1}}
-                </div>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <span class="block">ICMP</span>
-                <div class="input-checkbox">
-                  <input type="checkbox" name="brand" />
-                  {{form1.type.2}}
-                </div>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <span class="block">ALL</span>
-                <div class="input-checkbox">
-                  <input type="checkbox" name="marketing" />
-                  {{form1.type.3}}
-                </div>
-              </div>
-              <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-                <span><b>Allowed outbound protocols:</b></span>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <span class="block">SSH</span>
-                <div class="input-checkbox">
-                  <input type="checkbox" name="design" />
-                  {{form1.type.0}}
-                </div>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <span class="block">HTTPS</span>
-                <div class="input-checkbox">
-                  <input type="checkbox" name="dev" />
-                  {{form1.type.1}}
-                </div>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <span class="block">ICMP</span>
-                <div class="input-checkbox">
-                  <input type="checkbox" name="brand" />
-                  {{form1.type.2}}
-                </div>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <span class="block">ALL</span>
-                <div class="input-checkbox">
-                  <input type="checkbox" name="marketing" />
-                  {{form1.type.3}}
-                </div>
-              </div>
-            </form>
-          </div>
-          <div class="boxed boxed--border">
-            <form class="site-form" action=" {% url 'cusInf_NACL' %} " method="POST">
-              {%csrf_token%}
-              <div class="col-md-12 text-center boxed" style="margin-bottom:-4%; margin-top:-4%;">
-                <h5>NACL2</h5>
-              </div>
-              <div class="col-md-12">
-                <span><b>Source IP:</b></span>
-                <input type="text" name="name" placeholder="10.0.0.0/24 for example" class="validate-required" />
-              </div>
-              <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-                <span><b>Allowed inbound protocols:</b></span>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <span class="block">SSH</span>
-                <div class="input-checkbox">
-                  <input type="checkbox" name="design" />
-                  {{form1.type.0}}
-                </div>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <span class="block">HTTPS</span>
-                <div class="input-checkbox">
-                  <input type="checkbox" name="dev" />
-                  {{form1.type.1}}
-                </div>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <span class="block">ICMP</span>
-                <div class="input-checkbox">
-                  <input type="checkbox" name="brand" />
-                  {{form1.type.2}}
-                </div>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <span class="block">ALL</span>
-                <div class="input-checkbox">
-                  <input type="checkbox" name="marketing" />
-                  {{form1.type.3}}
-                </div>
-              </div>
-              <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-                <span><b>Allowed outbound protocols:</b></span>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <span class="block">SSH</span>
-                <div class="input-checkbox">
-                  <input type="checkbox" name="design" />
-                  {{form1.type.0}}
-                </div>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <span class="block">HTTPS</span>
-                <div class="input-checkbox">
-                  <input type="checkbox" name="dev" />
-                  {{form1.type.1}}
-                </div>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <span class="block">ICMP</span>
-                <div class="input-checkbox">
-                  <input type="checkbox" name="brand" />
-                  {{form1.type.2}}
-                </div>
-              </div>
-              <div class="col-md-3 col-6 text-center">
-                <span class="block">ALL</span>
-                <div class="input-checkbox">
-                  <input type="checkbox" name="marketing" />
-                  {{form1.type.3}}
-                </div>
-              </div>
-            </form>
-          </div>
-          <div class="boxed boxed--border">
+        <div class="boxed boxed--border">
             <form class="site-form" action=" {% url 'cusInf_NACL' %} " method="POST">
               {%csrf_token%}
               <div class="col-md-12 text-center boxed" style="margin-bottom:-4%; margin-top:-4%;">
@@ -457,8 +326,8 @@
               </div>
             </form>
           </div>
-          {% elif nacl == 4 %}
-          <div class="boxed boxed--border">
+        {% elif nacl == 4 %}
+        <div class="boxed boxed--border">
             <form class="site-form" action=" {% url 'cusInf_NACL' %} " method="POST">
               {%csrf_token%}
               <div class="col-md-12 text-center boxed" style="margin-bottom:-4%; margin-top:-4%;">
@@ -532,7 +401,7 @@
               </div>
             </form>
           </div>
-          <div class="boxed boxed--border">
+        <div class="boxed boxed--border">
             <form class="site-form" action=" {% url 'cusInf_NACL' %} " method="POST">
               {%csrf_token%}
               <div class="col-md-12 text-center boxed" style="margin-bottom:-4%; margin-top:-4%;">
@@ -606,7 +475,7 @@
               </div>
             </form>
           </div>
-          <div class="boxed boxed--border">
+        <div class="boxed boxed--border">
             <form class="site-form" action=" {% url 'cusInf_NACL' %} " method="POST">
               {%csrf_token%}
               <div class="col-md-12 text-center boxed" style="margin-bottom:-4%; margin-top:-4%;">
@@ -680,7 +549,7 @@
               </div>
             </form>
           </div>
-          <div class="boxed boxed--border">
+        <div class="boxed boxed--border">
             <form class="site-form" action=" {% url 'cusInf_NACL' %} " method="POST">
               {%csrf_token%}
               <div class="col-md-12 text-center boxed" style="margin-bottom:-4%; margin-top:-4%;">
@@ -754,7 +623,7 @@
               </div>
             </form>
           </div>
-          {% endif %}
+        {% endif %}
         <div class="row justify-content-center">
           <a class="btn btn--primary type--uppercase" style="margin-top:2%;" href="{% url 'cusInf_Basic' %}">
             <span class="btn__text">previous</span>
@@ -763,7 +632,7 @@
             <span class="btn__text">next</span>
           </a>
         </div>
-      </br>
+        </br>
       </div>
     </div>
   </div>

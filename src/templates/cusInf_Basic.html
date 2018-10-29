@@ -1,23 +1,22 @@
 {% extends "baseuser.html" %} {% load staticfiles %} {% block head_title %}Default Infrastructure | {% endblock %} {% block content %}
-<div class="container" style="min-height:865px;">
+<div class="container" style="min-height:857px;">
   <hr>
   <ol class="breadcrumbs" style="margin-bottom:0em;">
     <li><a href="{% url 'user' %}">Main menu</a></li>
     <li>Custom infrastructure</li>
   </ol>
   <div class="col-md-12">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="margin-bottom:5%;">
       <h2>Compose your <b>own</b> infrastructure !</h2>
     </div>
+  </div>
+  <div class="row justify-content-center">
+    <h3>Basic configuration</h5>
   </div>
   <div class="boxed boxed--border">
   <div class="col-md-12">
     <div class="row justify-content-center">
       <div class="col-md-12 col-lg-8">
-        <div class="row justify-content-center">
-          <h3>Basic configuration</h5>
-        </div>
-      </br>
         <section style="background:white;">
           <form class="site-form" action=" {% url 'cusInf_Basic' %} " method="POST">
             {%csrf_token%}
@@ -69,14 +68,24 @@
                 {{form.infrastructure_prvinst}}
               </div>
             </div>
-
-           <input type="submit" value="Next">
+            <div class="row justify-content-center">
+              <div class="col-md-2 text-center">
+              <input type="submit" value="    Next">
+              </div>
+            </div>
           </form>
-          
         </section>
       </div>
     </div>
   </div>
+</div>
+<div class="row justify-content-center">
+  <a class="btn btn--primary type--uppercase" style="margin-top:2%;" href="{% url 'user' %}">
+    <span class="btn__text">previous</span>
+  </a>
+  <a class="btn btn--primary type--uppercase" style="margin-top:2%;" href="{% url 'cusInf_NACL' %}">
+    <span class="btn__text">next</span>
+  </a>
 </div>
 </div>
 {% endblock %}

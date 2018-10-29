@@ -36,31 +36,34 @@ class CustomStack(models.Model):
     def __str__(self):
         return self.infrastructure_name
 
-class Nacl(models.Model):
-    PROT_CHOICES = (
-       ('0', 'HTTP'),
-       ('1', 'SSH'),
-       ('2', 'ICMP'),
-       ('3', 'ALL'),
-     )
-    type = MultiSelectField(choices=PROT_CHOICES)
+class NACL(models.Model):
     nacl_name = models.CharField(max_length=20)
     nacl_src_ip = models.GenericIPAddressField()
+    nacl_in_prot = models.CharField(max_length=20)
+    nacl_out_prot = models.CharField(max_length=20)
 
     def __str__(self):
         return self.nacl_name
 
 class SG(models.Model):
-    PROT_CHOICES = (
-       ('0', 'HTTP'),
-       ('1', 'SSH'),
-       ('2', 'ICMP'),
-       ('3', 'ALL'),
-     )
-    type = MultiSelectField(choices=PROT_CHOICES)
     sg_name = models.CharField(max_length=20)
     sg_src_ip = models.GenericIPAddressField()
-
+    sg_in_prot = models.CharField(max_length=20)
+    sg_out_prot = models.CharField(max_length=20)
 
     def __str__(self):
         return self.sg_name
+
+class Instance(models.Model):
+    INST_TYPE_CHOICES = (
+        (".micro", "T2.micro"),
+        ("small", "T2.small"),
+        ("tiny", "T2.tiny"),
+    )
+    AMI_CHOICES = (
+        ("Amazon AMI", "Amazon Linux AMI 2018.03.0"),
+        ("RedHat", "Red Hat Entreprise Linux 7.5"),
+        ("Ubuntu Server", "Ubuntu Server 16.04 LTS"),
+    )
+    ami_type = models.CharField(max_length = 20, default="T2.micro", choices = AMI_CHOICES)
+    instance_type = models.CharField(max_length = 20,default="Amazon Linux AMI 2018.03.0", choices = INST_TYPE_CHOICES)
