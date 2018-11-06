@@ -1,42 +1,36 @@
 {% extends "baseuser.html" %} {% load staticfiles %} {% block head_title %}Default Infrastructure | {% endblock %} {% block content %}
-<div class="container" style="min-height:857px;">
+<div class="container" style="min-height:825px;">
   <hr>
   <ol class="breadcrumbs" style="margin-bottom:0em;">
     <li><a href="{% url 'user' %}">Main menu</a></li>
-    <li>Custom infrastructure</li>
+    <li><a href="{% url 'cusInf_Basic' %}">Custom infrastructure</a></li>
+    <li><a href="{% url 'cusInf_NACL' %}">Network access lists</a></li>
   </ol>
   <div class="col-md-12">
-    <div class="row justify-content-center" style="margin-bottom:5%;">
+    <div class="row justify-content-center" style="margin-bottom:3%;margin-top:5%">
       <h2>Compose your <b>own</b> infrastructure !</h2>
     </div>
   </div>
   <div class="col-md-12">
-    <div class="row justify-content-center">
-      <div class="col-md-12 col-lg-8">
         <div class="row justify-content-center">
           <h3>Security groups configuration</h5>
         </div>
-        {% if sg == 1 %}
+        {% if sg == "1" %}
         <div class="boxed boxed--border">
+          <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-8">
           <form class="site-form" action=" {% url 'cusInf_SG' %} " method="POST">
             {%csrf_token%}
               <div class="col-md-12 text-center boxed" style="margin-bottom:-2%; margin-top:-4%;">
-                <h5>SG1</h5>
+                <h5>SG</h5>
                 <hr>
               </div>
-              <div class="row justify-content-center">
-                <div class="col-md-4 col-6 text-center">
-                  <span><b>Source IP:</b></span>
-                  {{form.sg_src_ip}}
-                </div>
-              </div>
-              </br>
               <div class="row">
-                <div class="col-md-4 text-center" style="margin-left:17%;" >
+                <div class="col-md-4 text-center" style="margin-left:17%; margin-bottom:5%" >
                   <span><b>Allowed inbound protocols:</b></span>
                   {{form.sg_in_prot}}
                 </div>
-                <div class="col-md-4 text-center ">
+                <div class="col-md-4 text-center "style="margin-bottom:5%">
                   <span><b>Allowed outbound protocols:</b></span>
                   {{form.sg_out_prot}}
                 </div>
@@ -48,919 +42,172 @@
               </div>
           </form>
         </div>
-        {% elif sg == 2 %}
+        {% elif sg == "2" %}
         <div class="boxed boxed--border">
-          <form class="text-left form-email row" data-success="Thanks for your enquiry, we'll be in touch shortly." data-error="Please fill in all fields correctly.">
-            <div class="col-md-12 text-center boxed"style="margin-top:-4%; margin-bottom:-4%;">
-              <h5>SG1</h5>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Allowed inbound protocols:</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">SSH</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
+          <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-8">
+          <form class="site-form" action=" {% url 'cusInf_SG' %} " method="POST">
+            {%csrf_token%}
+              <div class="col-md-12 text-center boxed" style="margin-bottom:-2%; margin-top:-4%;">
+                <h5>SG 1</h5>
+                <hr>
               </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">HTTPS</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
+              <div class="row">
+                <div class="col-md-4 text-center" style="margin-left:17%; margin-bottom:5%" >
+                  <span><b>Allowed inbound protocols:</b></span>
+                  {{form.sg_in_prot}}
+                </div>
+                <div class="col-md-4 text-center "style="margin-bottom:5%">
+                  <span><b>Allowed outbound protocols:</b></span>
+                  {{form.sg_out_prot}}
+                </div>
               </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ICMP</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
+              <div class="col-md-12 text-center boxed" style="margin-bottom:-2%; margin-top:-4%;">
+                <h5>SG 2</h5>
+                <hr>
               </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ALL</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
+              <div class="row">
+                <div class="col-md-4 text-center" style="margin-left:17%; margin-bottom:5%" >
+                  <span><b>Allowed inbound protocols:</b></span>
+                  {{form.sg_in_prot2}}
+                </div>
+                <div class="col-md-4 text-center "style="margin-bottom:5%">
+                  <span><b>Allowed outbound protocols:</b></span>
+                  {{form.sg_out_prot2}}
+                </div>
               </div>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Allowed outbound protocols:</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">SSH</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
+              <div class="row justify-content-center">
+                <div class="col-md-2 text-center">
+                <input type="submit" value="    Next">
+                </div>
               </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">HTTPS</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ICMP</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ALL</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Associated instances :</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 1</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 2</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 3</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 4</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
-              </div>
-            </div>
           </form>
         </div>
+        {% elif sg == "3" %}
         <div class="boxed boxed--border">
-          <form class="text-left form-email row" data-success="Thanks for your enquiry, we'll be in touch shortly." data-error="Please fill in all fields correctly.">
-            <div class="col-md-12 text-center boxed"style="margin-top:-4%; margin-bottom:-4%;">
-              <h5>SG2</h5>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Allowed inbound protocols:</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">SSH</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
+          <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-8">
+          <form class="site-form" action=" {% url 'cusInf_SG' %} " method="POST">
+            {%csrf_token%}
+              <div class="col-md-12 text-center boxed" style="margin-bottom:-2%; margin-top:-4%;">
+                <h5>SG 1</h5>
+                <hr>
               </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">HTTPS</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
+              <div class="row">
+                <div class="col-md-4 text-center" style="margin-left:17%; margin-bottom:5%" >
+                  <span><b>Allowed inbound protocols:</b></span>
+                  {{form.sg_in_prot}}
+                </div>
+                <div class="col-md-4 text-center "style="margin-bottom:5%">
+                  <span><b>Allowed outbound protocols:</b></span>
+                  {{form.sg_out_prot}}
+                </div>
               </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ICMP</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
+              <div class="col-md-12 text-center boxed" style="margin-bottom:-2%; margin-top:-4%;">
+                <h5>SG 2</h5>
+                <hr>
               </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ALL</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
+              <div class="row">
+                <div class="col-md-4 text-center" style="margin-left:17%; margin-bottom:5%" >
+                  <span><b>Allowed inbound protocols:</b></span>
+                  {{form.sg_in_prot2}}
+                </div>
+                <div class="col-md-4 text-center "style="margin-bottom:5%">
+                  <span><b>Allowed outbound protocols:</b></span>
+                  {{form.sg_out_prot2}}
+                </div>
               </div>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Allowed outbound protocols:</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">SSH</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
+              <div class="col-md-12 text-center boxed" style="margin-bottom:-2%; margin-top:-4%;">
+                <h5>SG 3</h5>
+                <hr>
               </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">HTTPS</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
+              <div class="row">
+                <div class="col-md-4 text-center" style="margin-left:17%; margin-bottom:5%" >
+                  <span><b>Allowed inbound protocols:</b></span>
+                  {{form.sg_in_prot3}}
+                </div>
+                <div class="col-md-4 text-center "style="margin-bottom:5%">
+                  <span><b>Allowed outbound protocols:</b></span>
+                  {{form.sg_out_prot3}}
+                </div>
               </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ICMP</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
+              <div class="row justify-content-center">
+                <div class="col-md-2 text-center">
+                <input type="submit" value="    Next">
+                </div>
               </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ALL</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Associated instances :</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 1</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 2</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 3</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 4</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
-              </div>
-            </div>
           </form>
         </div>
-        {% elif sg == 3 %}
+        {% elif sg == "4" %}
         <div class="boxed boxed--border">
-          <form class="text-left form-email row" data-success="Thanks for your enquiry, we'll be in touch shortly." data-error="Please fill in all fields correctly.">
-            <div class="col-md-12 text-center boxed"style="margin-top:-4%; margin-bottom:-4%;">
-              <h5>SG1</h5>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Allowed inbound protocols:</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">SSH</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
+          <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-8">
+          <form class="site-form" action=" {% url 'cusInf_SG' %} " method="POST">
+            {%csrf_token%}
+              <div class="col-md-12 text-center boxed" style="margin-bottom:-2%; margin-top:-4%;">
+                <h5>SG 1</h5>
+                <hr>
+              </div>
+              <div class="row">
+                <div class="col-md-4 text-center" style="margin-left:17%; margin-bottom:5%" >
+                  <span><b>Allowed inbound protocols:</b></span>
+                  {{form.sg_in_prot}}
+                </div>
+                <div class="col-md-4 text-center "style="margin-bottom:5%">
+                  <span><b>Allowed outbound protocols:</b></span>
+                  {{form.sg_out_prot}}
+                </div>
+              </div>
+              <div class="col-md-12 text-center boxed" style="margin-bottom:-2%; margin-top:-4%;">
+                <h5>SG 2</h5>
+                <hr>
+              </div>
+              <div class="row">
+                <div class="col-md-4 text-center" style="margin-left:17%; margin-bottom:5%" >
+                  <span><b>Allowed inbound protocols:</b></span>
+                  {{form.sg_in_prot2}}
+                </div>
+                <div class="col-md-4 text-center "style="margin-bottom:5%">
+                  <span><b>Allowed outbound protocols:</b></span>
+                  {{form.sg_out_prot2}}
+                </div>
+              </div>
+              <div class="col-md-12 text-center boxed" style="margin-bottom:-2%; margin-top:-4%;">
+                <h5>SG 3</h5>
+                <hr>
+              </div>
+              <div class="row">
+                <div class="col-md-4 text-center" style="margin-left:17%; margin-bottom:5%" >
+                  <span><b>Allowed inbound protocols:</b></span>
+                  {{form.sg_in_prot3}}
+                </div>
+                <div class="col-md-4 text-center "style="margin-bottom:5%">
+                  <span><b>Allowed outbound protocols:</b></span>
+                  {{form.sg_out_prot3}}
+                </div>
+              </div>
+              <div class="col-md-12 text-center boxed" style="margin-bottom:-2%; margin-top:-4%;">
+                <h5>SG 4</h5>
+                <hr>
+              </div>
+              <div class="row">
+                <div class="col-md-4 text-center" style="margin-left:17%; margin-bottom:5%" >
+                  <span><b>Allowed inbound protocols:</b></span>
+                  {{form.sg_in_prot4}}
+                </div>
+                <div class="col-md-4 text-center "style="margin-bottom:5%">
+                  <span><b>Allowed outbound protocols:</b></span>
+                  {{form.sg_out_prot4}}
+                </div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-md-2 text-center">
+                <input type="submit" value="    Next">
+                </div>
               </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">HTTPS</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ICMP</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ALL</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Allowed outbound protocols:</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">SSH</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">HTTPS</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ICMP</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ALL</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Associated instances :</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 1</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 2</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 3</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 4</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="boxed boxed--border">
-          <form class="text-left form-email row" data-success="Thanks for your enquiry, we'll be in touch shortly." data-error="Please fill in all fields correctly.">
-            <div class="col-md-12 text-center boxed"style="margin-top:-4%; margin-bottom:-4%;">
-              <h5>SG2</h5>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Allowed inbound protocols:</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">SSH</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">HTTPS</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ICMP</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ALL</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Allowed outbound protocols:</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">SSH</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">HTTPS</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ICMP</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ALL</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Associated instances :</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 1</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 2</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 3</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 4</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="boxed boxed--border">
-          <form class="text-left form-email row" data-success="Thanks for your enquiry, we'll be in touch shortly." data-error="Please fill in all fields correctly.">
-            <div class="col-md-12 text-center boxed"style="margin-top:-4%; margin-bottom:-4%;">
-              <h5>SG3</h5>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Allowed inbound protocols:</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">SSH</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">HTTPS</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ICMP</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ALL</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Allowed outbound protocols:</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">SSH</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">HTTPS</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ICMP</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ALL</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Associated instances :</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 1</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 2</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 3</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 4</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
-              </div>
-            </div>
-          </form>
-        </div>
-        {% elif sg == 4 %}
-        <div class="boxed boxed--border">
-          <form class="text-left form-email row" data-success="Thanks for your enquiry, we'll be in touch shortly." data-error="Please fill in all fields correctly.">
-            <div class="col-md-12 text-center boxed"style="margin-top:-4%; margin-bottom:-4%;">
-              <h5>SG1</h5>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Allowed inbound protocols:</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">SSH</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">HTTPS</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ICMP</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ALL</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Allowed outbound protocols:</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">SSH</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">HTTPS</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ICMP</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ALL</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Associated instances :</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 1</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 2</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 3</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 4</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="boxed boxed--border">
-          <form class="text-left form-email row" data-success="Thanks for your enquiry, we'll be in touch shortly." data-error="Please fill in all fields correctly.">
-            <div class="col-md-12 text-center boxed"style="margin-top:-4%; margin-bottom:-4%;">
-              <h5>SG2</h5>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Allowed inbound protocols:</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">SSH</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">HTTPS</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ICMP</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ALL</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Allowed outbound protocols:</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">SSH</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">HTTPS</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ICMP</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ALL</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Associated instances :</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 1</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 2</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 3</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 4</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="boxed boxed--border">
-          <form class="text-left form-email row" data-success="Thanks for your enquiry, we'll be in touch shortly." data-error="Please fill in all fields correctly.">
-            <div class="col-md-12 text-center boxed"style="margin-top:-4%; margin-bottom:-4%;">
-              <h5>SG3</h5>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Allowed inbound protocols:</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">SSH</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">HTTPS</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ICMP</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ALL</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Allowed outbound protocols:</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">SSH</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">HTTPS</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ICMP</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ALL</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Associated instances :</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 1</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 2</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 3</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 4</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="boxed boxed--border">
-          <form class="text-left form-email row" data-success="Thanks for your enquiry, we'll be in touch shortly." data-error="Please fill in all fields correctly.">
-            <div class="col-md-12 text-center boxed"style="margin-top:-4%; margin-bottom:-4%;">
-              <h5>SG4</h5>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Allowed inbound protocols:</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">SSH</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">HTTPS</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ICMP</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ALL</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Allowed outbound protocols:</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">SSH</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">HTTPS</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ICMP</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">ALL</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-12 text-center boxed" style="margin-top:-2%; margin-bottom:-4%;">
-              <span><b>Associated instances :</b></span>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 1</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="design" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 2</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="dev" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 3</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="brand" />
-                <label></label>
-              </div>
-            </div>
-            <div class="col-md-3 col-6 text-center">
-              <span class="block">Instance 4</span>
-              <div class="input-checkbox">
-                <input type="checkbox" name="marketing" />
-                <label></label>
-              </div>
-            </div>
           </form>
         </div>
         {% endif %}
-        <div class="row justify-content-center">
-          <a class="btn btn--primary type--uppercase" style="margin-top:2%;" href="{% url 'cusInf_NACL' %}">
-            <span class="btn__text">previous</span>
-          </a>
-          <a class="btn btn--primary type--uppercase" style="margin-top:2%;" href="{% url 'cusInf_Pub_Instance' %}">
-            <span class="btn__text">next</span>
-          </a>
-        </div>
-      </br>
       </div>
     </div>
   </div>

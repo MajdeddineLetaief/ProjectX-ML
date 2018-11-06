@@ -1,17 +1,18 @@
 {% extends "baseuser.html" %} {% load staticfiles %} {% block head_title %}Default Infrastructure | {% endblock %} {% block content %}
-<div class="container" style="min-height:857px;">
+<div class="container" style="min-height:825px;">
   <hr>
   <ol class="breadcrumbs" style="margin-bottom:0em;">
     <li><a href="{% url 'user' %}">Main menu</a></li>
     <li>Custom infrastructure</li>
   </ol>
+  {% if number == 0 or owner != user %}
   <div class="col-md-12">
-    <div class="row justify-content-center" style="margin-bottom:5%;">
+    <div class="row justify-content-center" style="margin-bottom:3%;margin-top:5%">
       <h2>Compose your <b>own</b> infrastructure !</h2>
     </div>
   </div>
   <div class="row justify-content-center">
-    <h3>Basic configuration</h5>
+    <h3>Basic configuration</h3>
   </div>
   <div class="boxed boxed--border">
   <div class="col-md-12">
@@ -27,45 +28,23 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-4"  style="margin-left:15%;">
+              <div class="col-md-4" style="margin-bottom:5%; margin-top:3%;" >
                 <div align="center" >
-                  <span><b>Public subnets number :</b></span>
+                  <span><b>Instances number :</b></span>
                 </div>
-                {{form.infrastructure_pubsub}}
+                {{form.infrastructure_pubinst}}
               </div>
-              <div class="col-md-4">
-                <div align="center" >
-                  <span><b>Private subnets number :</b></span>
-                </div>
-                {{form.infrastructure_prvsub}}
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-4" style="margin-left:7%;">
-                <div align="center" >
-                  <span><b>Network ACLs number :</b></span>
-                </div>
-                {{form.infrastructure_nacl}}
-              </div>
-              <div class="col-md-4" style="margin-left:21%;">
+              <div class="col-md-4" style="margin-bottom:5%; margin-top:3%;">
                 <div align="center" >
                   <span><b>Security groups number :</b></span>
                 </div>
                 {{form.infrastructure_sg}}
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-4" style="margin-bottom:5%; margin-top:3%;">
                 <div align="center" >
-                  <span><b>Public instances number :</b></span>
+                  <span><b>Network ACLs number :</b></span>
                 </div>
-                {{form.infrastructure_pubinst}}
-              </div>
-              <div class="col-md-4" style="margin-left:33%;">
-                <div align="center" >
-                  <span><b>Private instances number :</b></span>
-                </div>
-                {{form.infrastructure_prvinst}}
+                {{form.infrastructure_nacl}}
               </div>
             </div>
             <div class="row justify-content-center">
@@ -78,14 +57,95 @@
       </div>
     </div>
   </div>
-</div>
-<div class="row justify-content-center">
-  <a class="btn btn--primary type--uppercase" style="margin-top:2%;" href="{% url 'user' %}">
-    <span class="btn__text">previous</span>
-  </a>
-  <a class="btn btn--primary type--uppercase" style="margin-top:2%;" href="{% url 'cusInf_NACL' %}">
-    <span class="btn__text">next</span>
-  </a>
+  {% else %}
+  <div class="col-md-12">
+    <div class="row justify-content-center" >
+      <h2>Your infrastructure <b>{{infra_name}}</b> is available now !</h2>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <h3>To use it, follow these steps.</h3>
+  </div>
+  <div class="boxed bg--secondary boxed--md boxed--border" style="background:white;">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-8">
+        <div class="wizard">
+          <h5>Private key</h5>
+          <section class="text-center">
+            <div class="pos-vertical-center">
+              <h4>Download the private key !</h4>
+            </div>
+          </section>
+          <h5>Permission</h5>
+          <section class="text-center">
+            <div class="pos-vertical-center">
+              <h4>Change key permissions via the command:</h4>
+              <h4><b>chmod 400 newkp.pem</b></h4>
+            </div>
+          </section>
+          <h5>Connect</h5>
+          <section class="text-center">
+            {% if inst_number == "1" %}
+              <div class="pos-vertical-center">
+                <h4>Connect to your instances via this ssh command:</h4>
+                </hr>
+                <h4 style="color:#4d92df;"><b>Instance :</b> </h4>
+                <h4>ssh -i "newkp.pem" ec2-user@<b>{{ip_add}}</b><h4>
+              </div>
+            {% elif inst_number == "2" %}
+              <div class="pos-vertical-center">
+                <h4>Connect to your instances via this ssh command:</h4>
+                </hr>
+                <h4 style="color:#4d92df;"><b>Instance 1:</b> </h4>
+                <h4>ssh -i "newkp.pem" ec2-user@<b>{{ip_add}}</b><h4>
+                <h4 style="color:#4d92df;"><b>Instance 2:</b> </h4>
+                <h4>ssh -i "newkp.pem" ec2-user@<b>{{ip_add2}}</b><h4>
+              </div>
+            {% elif inst_number == "3" %}
+              <div class="pos-vertical-center">
+                <h4>Connect to your instances via this ssh command:</h4>
+                </hr>
+                <h4 style="color:#4d92df;"><b>Instance 1:</b> </h4>
+                <h4>ssh -i "newkp.pem" ec2-user@<b>{{ip_add}}</b><h4>
+                <h4 style="color:#4d92df;"><b>Instance 2:</b> </h4>
+                <h4>ssh -i "newkp.pem" ec2-user@<b>{{ip_add2}}</b><h4>
+                <h4 style="color:#4d92df;"><b>Instance 3:</b> </h4>
+                <h4>ssh -i "newkp.pem" ec2-user@<b>{{ip_add3}}</b><h4>
+              </div>
+            {% elif inst_number == "4" %}
+              <div class="pos-vertical-center">
+                <h4>Connect to your instances via this ssh command:</h4>
+                </hr>
+                <h4 style="color:#4d92df;"><b>Instance 1:</b> </h4>
+                <h4>ssh -i "newkp.pem" ec2-user@<b>{{ip_add}}</b><h4>
+                <h4 style="color:#4d92df;"><b>Instance 2:</b> </h4>
+                <h4>ssh -i "newkp.pem" ec2-user@<b>{{ip_add2}}</b><h4>
+                <h4 style="color:#4d92df;"><b>Instance 3:</b> </h4>
+                <h4>ssh -i "newkp.pem" ec2-user@<b>{{ip_add3}}</b><h4>
+                <h4 style="color:#4d92df;"><b>Instance 4:</b> </h4>
+                <h4>ssh -i "newkp.pem" ec2-user@<b>{{ip_add4}}</b><h4>
+              </div>
+            {% endif%}
+            </section>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="boxed bg--secondary boxed--md boxed--border" style="background:white;">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-8">
+        <a class="btn btn--primary type--uppercase" style="margin-left:15.5%" href="https://s3.eu-west-2.amazonaws.com/ml16compart/newkp.pem">
+            <span class="btn__text">Download private key</span>
+        </a>
+        <a class="btn btn--primary bg--pinterest type--uppercase" href="{% url 'cusInf_Delete' %}">
+            <span class="btn__text">Delete infrastructure</span>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  {% endif %}
 </div>
 </div>
 {% endblock %}

@@ -28,10 +28,9 @@ urlpatterns = [
     url(r'^cusInf_NACL/', newsletter_views.cusInf_NACL, name='cusInf_NACL'),
     url(r'^cusInf_SG/', newsletter_views.cusInf_SG, name='cusInf_SG'),
     url(r'^cusInf_Pub_Instance/', newsletter_views.cusInf_Pub_Instance, name='cusInf_Pub_Instance'),
-    url(r'^cusInf_Prv_Instance/', newsletter_views.cusInf_Prv_Instance, name='cusInf_Prv_Instance'),
-
-
-
+    url(r'^cusInf_Resume/', newsletter_views.cusInf_Resume, name='cusInf_Resume'),
+    url(r'^cusInf_Create/', newsletter_views.cusInf_Create, name='cusInf_Create'),
+    url(r'^cusInf_Delete/', newsletter_views.cusInf_Delete, name='cusInf_Delete'),
 ]
 
 if settings.DEBUG:

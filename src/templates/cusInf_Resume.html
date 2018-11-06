@@ -1,0 +1,123 @@
+
+{% extends "baseuser.html" %} {% load staticfiles %} {% block head_title %}Default Infrastructure | {% endblock %} {% block content %}
+<div class="container" style="min-height:825px;">
+  <hr>
+  <ol class="breadcrumbs" style="margin-bottom:0em;">
+    <li><a href="{% url 'user' %}">Main menu</a></li>
+    <li><a href="{% url 'cusInf_Basic' %}">Custom infrastructure</a></li>
+    <li><a href="{% url 'cusInf_NACL' %}">Network access lists</a></li>
+    <li><a href="{% url 'cusInf_SG' %}">Security groups</a></li>
+    <li><a href="{% url 'cusInf_Pub_Instance' %}">Instances</a></li>
+
+  </ol>
+  <div class="col-md-12">
+    <div class="row justify-content-center" style="margin-top:5%;">
+      <h2>Compose your <b>own</b> infrastructure !</h2>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <h3 style="margin-bottom:0.2em">Resume</h3>
+  </div>
+  <div class="row justify-content-center">
+
+  <h4>Your infrastructure named <b>"{{infra_name}}"</b> will contain </h4>
+  </div>
+
+  <div class="col-md-12">
+    <div class="boxed bg--secondary boxed--lg boxed--border" style="background:white;">
+      <div class="tabs-container text-center" data-content-align="left">
+            <div class="tab__content">
+              <section class="switchable bg--secondary" style="background:white;">
+                <div class="container">
+                  <div class="row justify-content-between">
+                    <div class="col-md-7 switchable__text">
+                      <ul class="accordion accordion-1">
+                        <li>
+                          <br>
+                          <div class="accordion__title">
+                            <span class="h5">Instances</span>
+                          </div>
+                          <div class="accordion__content">
+                            <p class="lead">
+                            {% if inst_number == "1" %}
+                              One EC2 Instance
+                              {% if instType1 == "T2.micro" %}
+                                with T2.micro type
+                              {% elif instType1 == "T2.small" %}
+                                with T2.small type
+                              {% elif instType1 == "T2.Tiny" %}
+                                with T2.tiny type
+                              {% endif %}
+                              {% if instAmi1 == "Amazon AMI" %}
+                                and Amazon OS
+                              {% elif instAmi1 == "RedHat" %}
+                                and Redhat OS
+                              {% elif instAmi1 == "Ubuntu Server" %}
+                                and Ubuntu OS.
+                              {% endif %}
+                            {% elif inst_number == "2" %}
+                              Two EC2 Instances the first with {{instType1}} type and {{instAmi1}} OS and the second is with the type {{instType2}} and {{instAmi2}} OS.
+                            {% elif inst_number == "3" %}
+                              Three EC2 Instances the first with {{instType1}} type and {{instAmi1}} OS, the second is with the type {{instType2}} and {{instAmi2}} OS and the third is with the type {{instType3}} and {{instAmi3}} OS.
+                            {% elif inst_number == "4" %}
+                              Four EC2 Instances the first with {{instType1}} type and {{instAmi1}} OS, the second is with the type {{instType2}} and {{instAmi2}} OS ,the third is with the type {{instType3}} and {{instAmi3}} OS and the fourth is with the type {{instType4}} and {{instAmi4}} OS.
+                            {% endif %}
+                            </p>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="accordion__title">
+                            <span class="h5">Network Access Lists</span>
+                          </div>
+                          <div class="accordion__content">
+                            <p class="lead">
+                              {% if nacl_number == "1" %}
+                                One Network Access List for the inbound protocol {{naclInProt1}} and the outbound protocol {{naclOutProt1}}.
+                              {% elif nacl_number == "2" %}
+                                Two Network Access Lists, the first is for the inbound protocol {{naclInProt1}} and the outbound protocol {{naclOutProt1}}, the second is for the inbound protocol {{naclInProt2}} and the outbound protocol {{naclOutProt2}}.
+                              {% elif nacl_number == "3" %}
+                                Three Network Access Lists, the first is for the inbound protocol {{naclInProt1}} and the outbound protocol {{naclOutProt1}}, the second is for the inbound protocol {{naclInProt2}} and the outbound protocol {{naclOutProt2}}, and the third is for the inbound protocol {{naclInProt3}} and the outbound protocol {{naclOutProt3}} .
+                              {% elif nacl_number == "4" %}
+                                Four Network Access Lists, the first is for the inbound protocol {{naclInProt1}} and the outbound protocol {{naclOutProt1}}, the second is for the inbound protocol {{naclInProt2}} and the outbound protocol {{naclOutProt2}}, the third is for the inbound protocol {{naclInProt3}} and the outbound protocol {{naclOutProt3}} and the fourth is for the inbound protocol {{naclInProt4}} and the outbound protocol {{naclOutProt4}} .
+                              {% endif %}
+                            </p>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="accordion__title">
+                            <span class="h5">Security Groups</span>
+                          </div>
+                          <div class="accordion__content">
+                            <p class="lead">
+                              {% if sg_number == "1" %}
+                                One Security Group for the inbound protocol {{sgInProt1}} and the outbound protocol {{sgOutProt1}}.
+                              {% elif sg_number == "2" %}
+                                Two Security Groups, the first is for the inbound protocol {{sgInProt1}} and the outbound protocol {{sgOutProt1}}, the second is for the inbound protocol {{sgInProt2}} and the outbound protocol {{sgOutProt2}} .
+                              {% elif sg_number == "3" %}
+                                Three Security Groups, the first is for the inbound protocol {{sgInProt1}} and the outbound protocol {{sgOutProt1}}, the second is for the inbound protocol {{sgInProt2}} and the outbound protocol {{sgOutProt2}} and the third is for the inbound protocol {{sgInProt3}} and the outbound protocol {{sgOutProt3}}.
+                              {% elif sg_number == "4" %}
+                                Three Security Groups, the first is for the inbound protocol {{sgInProt1}} and the outbound protocol {{sgOutProt1}}, the second is for the inbound protocol {{sgInProt2}} and the outbound protocol {{sgOutProt2}}, the third is for the inbound protocol {{sgInProt3}} and the outbound protocol {{sgOutProt3}} and the fourth is for the inbound protocol {{sgInProt4}} and the outbound protocol {{sgOutProt4}}.
+                              {% endif %}
+                            </p>
+                          </div>
+                        </li>
+                      </ul>
+                      <div class="col-md-12 text-center">
+                        <a class="btn btn--primary type--uppercase" href="{% url 'cusInf_Create' %}">
+                          <span class="btn__text">Confirm and build your inrastructure</span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="col-lg-5 col-md-6">
+                      <img alt="Image" class="border--round " src="{% static 'img/rocket.png' %}" />
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
