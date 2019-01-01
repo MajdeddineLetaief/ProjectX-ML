@@ -26,6 +26,10 @@ def home(request):
         "home_title" : "Thank you !"
     }
     return render(request, "home.html", context)
+
+def about(request):
+
+    return render(request, "about.html", {})
 #########################################################
 def contact(request):
      form = ContactForm(request.POST or None)
@@ -45,6 +49,7 @@ def contact(request):
         "contact_form" : form,
      }
      return render(request, "forms.html", context)
+
 #########################################################
 @login_required
 def user(request):

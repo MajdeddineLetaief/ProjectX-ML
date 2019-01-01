@@ -352,7 +352,7 @@
         "ImageId": "ami-0708175939932fc75",
         "InstanceType": "t2.micro",
         "KeyName" : "newkp",
-        "Tags" : [{"Key" : "Name", "Value" : "PubEc2CF"}],
+        
         "SecurityGroups": [
           {
             "Ref": "Ec2SecurityGroup1"
@@ -385,7 +385,7 @@
           "ImageId": "ami-00ee3b59e07408c27",
           "InstanceType": "t2.micro",
           "KeyName" : "newkp",
-          "Tags" : [{"Key" : "Name", "Value" : "PriEc2CF"}],
+
           "SecurityGroups": [
             {
               "Ref": "Ec2SecurityGroup2"

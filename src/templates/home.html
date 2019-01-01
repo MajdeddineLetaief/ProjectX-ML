@@ -9,14 +9,14 @@
         <div class="row">
           <div class="col-md-12">
             <div class="typed-headline">
-              <span class="h1 inline-block"> ProjectX ! Move </span>
+              <span class="h1 inline-block"> Stack ! Move </span>
               <span class="h1 inline-block typed-text typed-text--cursor color--primary" data-typed-strings="fast,quick,rapid "></span>
               <p class="lead">
-                Build fast, powerful cloud based infrastructures with an easy
+                Build a fast, powerful cloud based infrastructures with an easy
                 <br class="hidden-xs hidden-sm" /> way to suit a range of purposes.
               </p>
             </div>
-            <a class="btn btn--primary type--uppercase" href="#">
+            <a class="btn btn--primary type--uppercase" href="#demo">
               <span class="btn__text">View The Demos</span>
             </a>
           </div>
@@ -25,68 +25,202 @@
     </li>
   </ul>
 </section>
+
+<section class="text-center bg--secondary">
 <div class="tab__content">
     <section class="testimonials-1 space--xs bg--secondary">
+      <div class="text-center">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8">
+                <h1>Brought to you by</h1>
+            </div>
+        </div>
+      </div>
+      </br></br>
+        <div class="text-center">
       <div class="container">
+
         <div class="row">
-          <div class="col-md-4">
-            <p class="lead">
-              Trusted by over 20,000 customers
-              <br class="hidden-xs hidden-sm" /> in over 140 countries
-            </p>
-          </div>
-          <div class="col-md-8">
+
+          <div class="col-md-12">
             <ul class="list-inline social-list">
               <li class="list-inline-item">
-                <img alt="Image" class="image--xxs" src="{% static 'img/partner-3.png' %}" />
+                <img alt="Image" class="image--xs" src="{% static 'img/logo_redhat.png' %}" />
               </li>
               <li class="list-inline-item">
-                <img alt="Image" class="image--xxs" src="{% static 'img/partner-2.png' %}" />
+                <img alt="Image" class="image--xs" src="{% static 'img/logo_github.png' %}" />
               </li>
               <li class="list-inline-item">
-                <img alt="Image" class="image--xxs" src="{% static 'img/partner-4.png' %}" />
+                <img alt="Image" class="image--xs" src="{% static 'img/logo_aws.png' %}" />
               </li>
               <li class="list-inline-item">
-                <img alt="Image" class="image--xxs" src="{% static 'img/partner-5.png' %}" />
+                <img alt="Image" class="image--xs" src="{% static 'img/logo_jenkins.png' %}" />
               </li>
               <li class="list-inline-item">
-                <img alt="Image" class="image--xxs" src="{% static 'img/partner-6.png' %}" />
+                <img alt="Image" class="image--xs" src="{% static 'img/logo_atom.png' %}" />
               </li>
+
             </ul>
           </div>
         </div>
       </div>
+      </div>
     </section>
   </div>
-{% endblock %} {% block Signup %}
-<!-- call from views.py -->
-<section class="text-center" id="about">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-sm-4 col-md-4">
-        <h1>{{home_title}}</h1>
-        <form method="POST" action=""> {% csrf_token %}
-          <!-- form call from views.py   -->
-          {{ home_SignUpForm.as_p }}
-          <input type="submit" value="Sign Up" />
-        </form>
-        <br class="hidden-xs hidden-sm" />
-      </div>
-    </div>
-  </div>
+</br>
+  </section>
 
-  <!-- <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-sm-4 col-md-4">
-        <h1>{{home_title}}</h1>
-        <form method="POST" action=""> {% csrf_token %}
-          <!-- form call from views.py   -->
-          {{ home_ExRegistrationForm }}
-          <input type="submit" value="Sign Up" />
-        </form>
-        <br class="hidden-xs hidden-sm" />
-      </div>
-    </div>
-  </div> -->
-</section>
+  <section class="text-center bg--dark">
+    </br>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-10 col-lg-8">
+                            <h2>Why you'll love Stack</h2>
+                            <p class="lead">
+                                Whether you’re building a predefined or customized cloud based infrastructure, Stack has your design and functionality needs covered.
+                            </p>
+                            </br>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>
+            <section class="bg--dark">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="feature feature-2 boxed boxed--border">
+                                <i class="icon icon-Wizard color--primary"></i>
+                                <div class="feature__body">
+                                    <h5>Numerous models</h5>
+                                    <p>
+                                        Choose the best cloud-based infrastructure model to satisfy your needs.
+                                    </p>
+                                </div>
+                            </div>
+                            <!--end feature-->
+                        </div>
+                        <div class="col-md-4">
+                            <div class="feature feature-2 boxed boxed--border">
+                                <i class="icon icon-Clock-Back color--primary"></i>
+                                <div class="feature__body">
+                                    <h5>Time Saving process</h5>
+                                    <p>
+                                        Save time on building your cloud-based infrastructure 4 times less then the traditional process.
+                                    </p>
+                                </div>
+                            </div>
+                            <!--end feature-->
+                        </div>
+                        <div class="col-md-4">
+                            <div class="feature feature-2 boxed boxed--border">
+                                <i class="icon icon-Duplicate-Window color--primary"></i>
+                                <div class="feature__body">
+                                    <h5>Security needs</h5>
+                                    <p>
+                                      We insure the network and system security for your own infrastructure.
+                                    </p>
+                                </div>
+                            </div>
+                            <!--end feature-->
+                        </div>
+                        <div class="col-md-4">
+                            <div class="feature feature-2 boxed boxed--border">
+                                <i class="icon icon-Coding color--primary"></i>
+                                <div class="feature__body">
+                                    <h5> Ease of use</h5>
+                                    <p>
+                                        Our minimalistic process removes the complexity of the infrastructure making process.
+                                    </p>
+                                </div>
+                            </div>
+                            <!--end feature-->
+                        </div>
+                        <div class="col-md-4">
+                            <div class="feature feature-2 boxed boxed--border">
+                                <i class="icon icon-Laptop-Phone color--primary"></i>
+                                <div class="feature__body">
+                                    <h5>Whenever you want</h5>
+                                    <p>
+                                        Stack make you build your infrastructures with any connected divice anytime.
+                                    </p>
+                                </div>
+                            </div>
+                            <!--end feature-->
+                        </div>
+                        <div class="col-md-4">
+                            <div class="feature feature-2 boxed boxed--border">
+                                <i class="icon icon-Life-Jacket color--primary"></i>
+                                <div class="feature__body">
+                                    <h5>Personal Support</h5>
+                                    <p>
+                                        Support is for us, you can contact us whenever you want, we are avaialable 24/7.
+                                    </p>
+                                </div>
+                            </div>
+                            <!--end feature-->
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>
+<a name="demo"></a>
+            <section class="switchable feature-large bg--secondary">
+                <div class="container">
+                    <div class="row justify-content-between">
+                        <div class="col-md-6 col-12">
+                          </br>
+                            <div class="video-cover border--round box-shadow-wide">
+                                <div class="background-image-holder">
+                                    <img alt="image" src="img/inner-6.jpg" />
+                                </div>
+                                <div class="video-play-icon"></div>
+                                <iframe data-src="https://www.youtube.com/embed/9YffrCViTVk" allowfullscreen="allowfullscreen"></iframe>
+                            </div>
+                            <!--end video cover-->
+                        </div>
+                        <div class="col-md-6 col-lg-5">
+                          </br></br>
+                            <div class="switchable__text">
+                                <h2>Build your predefined infrastructure model.</h2>
+                                <p class="lead">
+                                    You will find 4 various models (Tiny, Micro, Medium or Large) to fit your needs for building your own cloud-based infrastructure.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+
+                <div class="container">
+                    <div class="row justify-content-between">
+                        <div class="col-md-5 col-12">
+                          </br></br>
+                          <div class="switchable__text">
+                              <h2>Build your customized infrastructure model.</h2>
+                              <p class="lead">
+                                  The game is yours to build your cutomized cloud-based infrastructure model that fits your needs.
+                              </p>
+                          </div>
+                        </div>
+                        <div class="col-md-6 col-6">
+                          </br>
+
+                            <div class="video-cover border--round box-shadow-wide">
+                                <div class="background-image-holder">
+                                    <img alt="image" src="img/inner-6.jpg" />
+                                </div>
+                                <div class="video-play-icon"></div>
+                                <iframe data-src="https://www.youtube.com/embed/9YffrCViTVk" allowfullscreen="allowfullscreen"></iframe>
+                            </div>
+                            <!--end video cover-->
+                        </div>
+                    </div>
+                    </br>
+                    <!--end of row-->
+                </div>
+            </section>
 {% endblock %}

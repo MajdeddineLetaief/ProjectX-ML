@@ -446,7 +446,6 @@
         "ImageId": "ami-0708175939932fc75",
         "InstanceType": "t2.micro",
         "KeyName" : "newkp",
-        "Tags" : [{"Key" : "Name", "Value" : "Pub1Ec2CF"}],
         "SecurityGroups": [
           {
             "Ref": "Ec2SecurityGroup1"
@@ -479,7 +478,6 @@
         "ImageId": "ami-058f46b781900723c",
         "InstanceType": "t2.micro",
         "KeyName" : "newkp",
-        "Tags" : [{"Key" : "Name", "Value" : "Pub2Ec2CF"}],
         "SecurityGroups": [
           {
             "Ref": "Ec2SecurityGroup1"
@@ -512,7 +510,6 @@
           "ImageId": "ami-00ee3b59e07408c27",
           "InstanceType": "t2.micro",
           "KeyName" : "newkp",
-          "Tags" : [{"Key" : "Name", "Value" : "Pri1Ec2CF"}],
           "SecurityGroups": [
             {
               "Ref": "Ec2SecurityGroup2"
@@ -545,7 +542,7 @@
           "ImageId": "ami-049bd848e8c4021ad",
           "InstanceType": "t2.micro",
           "KeyName" : "newkp",
-          "Tags" : [{"Key" : "Name", "Value" : "Pri2Ec2CF"}],
+
           "SecurityGroups": [
             {
               "Ref": "Ec2SecurityGroup2"

@@ -1,0 +1,61 @@
+{% extends "base.html" %} {% load staticfiles %} {% block head_title %}About us | {% endblock %} {% block background%}
+<section class="text-center imagebg space--lg" data-overlay="3">
+                <div class="background-image-holder">
+                    <img alt="background" src="{% static 'img/cowork-1.jpg' %}" />
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-lg-6">
+                            <h1>Meet The Maker</h1>
+
+                        </div>
+                    </div>
+                </div>
+</section>
+</br>
+<section class="switchable feature-large">
+              <div class="container">
+                  <div class="row justify-content-around">
+                      <div class="col-md-6">
+                          <img alt="Image" class="border--round" src="{% static 'img/test.png' %}" />
+                      </div>
+                      <div class="col-md-6 col-lg-5" style="margin-top:10%;">
+                          <div class="switchable__text">
+                              <div class="text-block">
+                                  <h2>Majdeddine LETAIEF</h2>
+                                  <span>Founder &amp; Cloud Computing engineer</span>
+                              </div>
+                              <p class="lead">
+                                  Launching an attractive and scalable infrastructures quickly and affordably is important for modern IT companies &mdash; Stack offers massive value without looking.
+                              </p>
+                              <ul class="social-list list-inline list--hover">
+                                  <li>
+                                      <a href="#">
+                                          <i class="socicon socicon-mail icon icon--xs"></i>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="#">
+                                          <i class="socicon socicon-google icon icon--xs"></i>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="#">
+                                          <i class="socicon socicon-twitter icon icon--xs"></i>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="#">
+                                          <i class="socicon socicon-instagram icon icon--xs"></i>
+                                      </a>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+                  <!--end of row-->
+              </div>
+              <!--end of container-->
+          </section>
+          </br>
+{% endblock %}
