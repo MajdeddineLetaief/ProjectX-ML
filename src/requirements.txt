@@ -21,7 +21,7 @@ click==6.7
 colorama==0.3.9
 configobj==5.0.6
 cryptography==2.1.4
-Django==1.11.10
+Django==1.11.23
 django-jenkins==0.110.0
 django-multiselectfield==0.1.8
 django-registration-redux==2.4
