@@ -100,7 +100,7 @@ python-utils==2.3.0
 pytz==2013.7
 PyYAML==3.12
 requests==2.9.1
-rsa==3.4.2
+rsa==4.7
 s3transfer==0.1.13
 scipy==0.13.0b1
 semantic-version==2.5.0
